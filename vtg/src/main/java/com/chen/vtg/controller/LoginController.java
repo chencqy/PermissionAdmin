@@ -3,13 +3,12 @@ package com.chen.vtg.controller;
 import com.chen.vtg.entity.UserEntity;
 import com.chen.vtg.service.UserService;
 import com.chen.vtg.utils.Result;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author : Chen
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Modify by :
  */
 
+@Api("登录接口")
 @RestController
 public class LoginController {
 
@@ -26,6 +26,7 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    @ApiOperation(value = "用户注册", notes = "新用户注册")
     @PostMapping("/register")
     public Result<UserEntity> register(@RequestBody UserEntity userEntity) {
         if (userEntity == null) {
@@ -35,17 +36,10 @@ public class LoginController {
         return Result.ok(userEntity);
     }
 
+    // TODO : 暂时弃用
     @GetMapping("/login")
     public Result<Object> login() {
         return Result.ok(null);
     }
-//    @GetMapping("/testException")
-//    public String testException(@RequestParam("i") int i) {
-//        if (i == 1) {
-//            throw new UserNameNotMatchPasswordException("用户名与密码不匹配");
-//        }
-//
-//        return "success";
-//    }
 
 }

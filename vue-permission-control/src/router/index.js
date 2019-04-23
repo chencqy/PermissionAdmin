@@ -149,18 +149,10 @@ export const asyncRouterMap = [
       icon: 'link'
     },
     children: [{
-      path: 'https://www.baidu.com/',
+      path: 'http://localhost/api/swagger-ui.html',
       meta: {
-        resources: 'logs',
-        title: '系统日志',
-        icon: 'link'
-      }
-    },
-    {
-      path: 'http://localhost/api/druid',
-      meta: {
-        resources: 'database',
-        title: '数据库监控',
+        resources: 'interface',
+        title: '接口文档',
         icon: 'link'
       }
     }]

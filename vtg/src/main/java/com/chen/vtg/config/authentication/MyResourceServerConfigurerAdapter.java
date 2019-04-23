@@ -23,6 +23,13 @@ public class MyResourceServerConfigurerAdapter extends ResourceServerConfigurerA
                 .antMatchers("/register").permitAll()
                 .antMatchers("/**/*.jpg", "/**/*.png", "/**/*.jpeg").permitAll()
                 .antMatchers("/users/**", "/menus/**", "/roles/**", "/admin/**").hasRole("ADMIN")
+                .antMatchers(
+                        "/webjars/**",
+                        "/resources/**",
+                        "/swagger-ui.html",
+                        "/swagger-resources/**",
+                        "/v2/api-docs").permitAll()
+                .antMatchers("/druid/**").permitAll()
                 .anyRequest()
                 .authenticated();
     }
