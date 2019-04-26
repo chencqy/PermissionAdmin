@@ -37,45 +37,42 @@ export const constantRouterMap = [
       component: () => import('@/views/dashboard/index')
     }]
   },
-  { path: '*', redirect: '/404', hidden: true }
+  { path: '*', redirect: '/404', hidden: true },
+  {
+    path: '/article',
+    component: Layout,
+    // component: () => import('@/views/pre/article/index'),
+    name: 'article',
+    meta: {
+      title: '文章管理',
+      icon: 'edit'
+    },
+    children: [
+      {
+        path: 'detail',
+        component: () => import('@/views/pre/article/ArticleDetail'),
+        name: 'detail',
+        meta: {
+          // resources: '',
+          title: '文章详情',
+          icon: 'edit'
+        }
+      },
+      {
+        path: 'list',
+        component: () => import('@/views/pre/article/index'),
+        name: 'list',
+        meta: {
+          // resources: '',
+          title: '文章列表',
+          icon: 'edit'
+        }
+      }
+    ]
+  }
 ]
 
 export const asyncRouterMap = [
-  // {
-  //   path: '/example',
-  //   component: Layout,
-  //   redirect: '/example/table',
-  //   name: 'Example',
-  //   meta: { title: 'Example', icon: 'example' },
-  //   children: [
-  //     {
-  //       path: 'table',
-  //       name: 'Table',
-  //       component: () => import('@/views/table/index'),
-  //       meta: { title: 'Table', icon: 'table' }
-  //     },
-  //     {
-  //       path: 'tree',
-  //       name: 'Tree',
-  //       component: () => import('@/views/tree/index'),
-  //       meta: { title: 'Tree', icon: 'tree', roles: ['admin'] }
-  //     }
-  //   ]
-  // },
-  //
-  // {
-  //   path: '/form',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'Form',
-  //       component: () => import('@/views/form/index'),
-  //       meta: { title: 'Form', icon: 'form' }
-  //     }
-  //   ]
-  // },
-
   {
     path: '/pre',
     component: Layout,
@@ -111,10 +108,12 @@ export const asyncRouterMap = [
       },
       {
         path: 'article',
-        component: () => import('@/views/pre/article/index'),
+        component: Layout,
+        // component: () => import('@/views/pre/article/index'),
         name: 'article',
         meta: {
-          resources: 'article'
+          resources: 'article',
+          title: '文章管理'
         }
       }
     ]
