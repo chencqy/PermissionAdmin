@@ -16,12 +16,6 @@ public interface ArticleEntityMapper extends BaseMapper<ArticleEntity, String> {
     List<ArticleEntity> getArticleByTitle(String title);
 
     /**
-     * @param
-     * @return List<ArticleEntity>
-     */
-    List<ArticleEntity> getArticleList();
-
-    /**
      * @param uid
      * @return List<ArticleEntity>
      */

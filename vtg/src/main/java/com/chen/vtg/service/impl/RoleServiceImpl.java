@@ -6,6 +6,7 @@ import com.chen.vtg.entity.RoleEntity;
 import com.chen.vtg.mapper.RoleEntityMapper;
 import com.chen.vtg.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  * @Description :
  * @Modify by :
  */
+@Service
 public class RoleServiceImpl extends BaseServiceImpl<RoleEntity, Integer, BaseMapper> implements RoleService {
 
     @Autowired

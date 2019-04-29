@@ -69,3 +69,9 @@ mybatis:
     #逻辑删除配置
     logic-delete-value: -1
     logic-not-delete-value: 0
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

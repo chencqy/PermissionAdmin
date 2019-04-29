@@ -3,7 +3,6 @@ package com.chen.vtg.entity;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * @Author : Chen
@@ -30,12 +29,5 @@ public class ArticleEntity {
     private Integer vote;
 
     private LocalDateTime createTime;
-
-    /**
-     * 文章所含标签
-     */
-    private List<TagEntity> tags;
-
-
 
 }

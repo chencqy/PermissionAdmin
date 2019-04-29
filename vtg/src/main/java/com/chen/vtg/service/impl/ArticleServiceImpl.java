@@ -28,11 +28,6 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleEntity, String, B
     }
 
     @Override
-    public List<ArticleEntity> getArticleList() {
-        return articleEntityMapper.getArticleList();
-    }
-
-    @Override
     public List<ArticleEntity> getArticleByUid(int uid) {
         return articleEntityMapper.getArticleByUid(uid);
     }

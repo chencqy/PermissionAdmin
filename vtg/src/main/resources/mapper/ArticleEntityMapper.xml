@@ -12,8 +12,8 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     </resultMap>
     <sql id="Base_Column_List">
-    id, uid, title, content, image, status, vote, create_time
-  </sql>
+        id, uid, title, content, image, status, vote, create_time
+    </sql>
 
     <select id="getArticleByTitle" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -22,7 +22,7 @@
         where title LIKE "%"#{title,jdbcType=VARCHAR}"%"
     </select>
 
-    <select id="getArticleList" resultMap="BaseResultMap">
+    <select id="selectList" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from article
@@ -42,24 +42,24 @@
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from article
-    where id = #{id,jdbcType=INTEGER}
+        delete from article
+        where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.chen.vtg.entity.ArticleEntity">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into article (uid, title, content, image,
-        status, vote, create_time)
-        values (#{uid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR},
-        #{image,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{vote,jdbcType=INTEGER},
-        #{createTime,jdbcType=TIMESTAMP})
+            insert into article (uid, title, content, image,
+            status, vote, create_time)
+            values (#{uid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR},
+            #{image,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{vote,jdbcType=INTEGER},
+            #{createTime,jdbcType=TIMESTAMP})
     </insert>
     <insert id="insertSelective" parameterType="com.chen.vtg.entity.ArticleEntity">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into article
+            insert into article
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="uid != null">
                 uid,
