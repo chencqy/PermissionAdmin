@@ -1,8 +1,8 @@
 package com.chen.vtg.service.impl;
 
-import com.chen.vtg.base.mapper.BaseMapper;
 import com.chen.vtg.base.service.impl.BaseServiceImpl;
 import com.chen.vtg.entity.TagEntity;
+import com.chen.vtg.mapper.TagEntityMapper;
 import com.chen.vtg.service.TagService;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +14,5 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class TagServiceImpl extends BaseServiceImpl<TagEntity, String, BaseMapper> implements TagService {
+public class TagServiceImpl extends BaseServiceImpl<TagEntity, String, TagEntityMapper> implements TagService {
 }

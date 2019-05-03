@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 public class TagEntity  {
 
-    private Long id;
+    private Integer id;
 
     private String name;
 

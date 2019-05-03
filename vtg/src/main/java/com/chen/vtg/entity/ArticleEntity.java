@@ -14,9 +14,9 @@ import java.time.LocalDateTime;
 @Data
 public class ArticleEntity {
 
-    private Long id;
+    private Integer id;
 
-    private Long uid;
+    private Integer uid;
 
     private String title;
 

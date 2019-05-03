@@ -1,6 +1,5 @@
 package com.chen.vtg.service.impl;
 
-import com.chen.vtg.base.mapper.BaseMapper;
 import com.chen.vtg.base.service.impl.BaseServiceImpl;
 import com.chen.vtg.entity.RoleEntity;
 import com.chen.vtg.mapper.RoleEntityMapper;
@@ -17,7 +16,7 @@ import java.util.List;
  * @Modify by :
  */
 @Service
-public class RoleServiceImpl extends BaseServiceImpl<RoleEntity, Integer, BaseMapper> implements RoleService {
+public class RoleServiceImpl extends BaseServiceImpl<RoleEntity, Integer, RoleEntityMapper> implements RoleService {
 
     @Autowired
     RoleEntityMapper roleEntityMapper;

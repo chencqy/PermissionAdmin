@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class RoleEntity {
 
-    private Long id;
+    private Integer id;
 
     private String role;
 

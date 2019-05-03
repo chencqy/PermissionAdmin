@@ -1,6 +1,5 @@
 package com.chen.vtg.service.impl;
 
-import com.chen.vtg.base.mapper.BaseMapper;
 import com.chen.vtg.base.service.impl.BaseServiceImpl;
 import com.chen.vtg.entity.ArticleEntity;
 import com.chen.vtg.mapper.ArticleEntityMapper;
@@ -17,7 +16,7 @@ import java.util.List;
  * @Modify by :
  */
 @Service
-public class ArticleServiceImpl extends BaseServiceImpl<ArticleEntity, String, BaseMapper> implements ArticleService {
+public class ArticleServiceImpl extends BaseServiceImpl<ArticleEntity, String, ArticleEntityMapper> implements ArticleService {
 
     @Autowired
     ArticleEntityMapper articleEntityMapper;
