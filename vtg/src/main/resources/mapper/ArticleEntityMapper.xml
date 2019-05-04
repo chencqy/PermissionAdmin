@@ -11,6 +11,21 @@
         <result column="vote" jdbcType="INTEGER" property="vote" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     </resultMap>
+    <resultMap id="FullResultMap" type="com.chen.vtg.entity.vo.ArticleVo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="uid" jdbcType="INTEGER" property="uid" />
+        <result column="author" jdbcType="VARCHAR" property="author" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="content" jdbcType="LONGVARCHAR" property="content" />
+        <result column="image" jdbcType="VARCHAR" property="image" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="vote" jdbcType="INTEGER" property="vote" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <collection property="tags" ofType="com.chen.vtg.entity.TagEntity">
+            <id column="tid" jdbcType="INTEGER" property="id"/>
+            <result column="name" jdbcType="VARCHAR" property="name"/>
+        </collection>
+    </resultMap>
     <sql id="Base_Column_List">
         id, uid, title, content, image, status, vote, create_time
     </sql>
@@ -21,6 +36,16 @@
         from article
         where title LIKE "%"#{title,jdbcType=VARCHAR}"%"
     </select>
+
+    <select id="getArticleList" resultMap="FullResultMap">
+        SELECT a.id, a.uid, u.name AS author, a.title, a.content, a.image, a.status, a.vote, a.create_time,
+               t.id AS tid, t.name
+        FROM article AS a
+        LEFT JOIN tag_article AS tagr ON a.id = tagr.aid
+        LEFT JOIN tag AS t ON t.id = tagr.tid
+        LEFT JOIN t_user AS u ON a.uid = u.id
+    </select>
+
 
     <select id="selectList" resultMap="BaseResultMap">
         select

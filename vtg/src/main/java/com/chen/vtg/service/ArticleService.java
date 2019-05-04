@@ -2,6 +2,9 @@ package com.chen.vtg.service;
 
 import com.chen.vtg.base.service.BaseService;
 import com.chen.vtg.entity.ArticleEntity;
+import com.chen.vtg.entity.vo.ArticleVo;
+import com.chen.vtg.entity.vo.PageVo;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,5 +23,11 @@ public interface ArticleService extends BaseService<ArticleEntity, String> {
      * @return List<ArticleEntity>
      */
     List<ArticleEntity> getArticleByUid(int uid);
+
+    /**
+     *
+     * @return PageInfo<ArticleEntity>
+     */
+    PageInfo<ArticleVo> getArticleList(PageVo page);
 
 }

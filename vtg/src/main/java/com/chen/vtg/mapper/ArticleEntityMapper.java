@@ -2,6 +2,7 @@ package com.chen.vtg.mapper;
 
 import com.chen.vtg.base.mapper.BaseMapper;
 import com.chen.vtg.entity.ArticleEntity;
+import com.chen.vtg.entity.vo.ArticleVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,4 +22,8 @@ public interface ArticleEntityMapper extends BaseMapper<ArticleEntity, String> {
      */
     List<ArticleEntity> getArticleByUid(int uid);
 
+    /**
+     * @return List<ArticleVo>
+     */
+    List<ArticleVo> getArticleList();
 }
