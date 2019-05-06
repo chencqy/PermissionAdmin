@@ -1,8 +1,9 @@
 import request from '@/utils/request'
 
-export function getArticleList() {
+export function getArticleList(query) {
   return request({
     url: '/article/list',
-    method: 'get'
+    method: 'get',
+    params: query
   })
 }

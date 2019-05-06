@@ -11,7 +11,6 @@ export function recursionRouter(userRouter = [], allRouter = []) {
   var realRoutes = []
   allRouter.forEach((v, i) => {
     userRouter.forEach((item, index) => {
-      debugger
       if (item.resources === v.meta.resources) {
         if (item.children && item.children.length > 0) {
           v.children = recursionRouter(item.children, v.children)
@@ -54,7 +53,6 @@ const permission = {
   actions: {
     GenerateRoutes({ commit }, data) {
       return new Promise(resolve => {
-        debugger
         commit('SET_ROUTERS', recursionRouter(data, asyncRouterMap))
         resolve()
       })

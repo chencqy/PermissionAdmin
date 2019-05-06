@@ -2,6 +2,7 @@ package com.chen.vtg.controller;
 
 import com.chen.vtg.base.controller.BaseController;
 import com.chen.vtg.entity.ArticleEntity;
+import com.chen.vtg.entity.vo.ArticleVo;
 import com.chen.vtg.entity.vo.PageVo;
 import com.chen.vtg.service.ArticleService;
 import com.github.pagehelper.PageInfo;
@@ -33,13 +34,13 @@ public class ArticleController extends BaseController<ArticleEntity, String, Art
     /**
      *
      * @param page
-     * @return articleEntityLists
+     * @return articleLists
      */
     @ApiOperation(value = "查询文章", notes = "查询所有文章")
     @GetMapping("/list")
-    public PageInfo<ArticleEntity> selectList(PageVo page) {
-        PageInfo<ArticleEntity> articleEntityLists = articleService.selectList(page);
-        return articleEntityLists;
+    public PageInfo<ArticleVo> selectList(PageVo page) {
+        PageInfo<ArticleVo> articleLists = articleService.getArticleList(page);
+        return articleLists;
     }
 
 }

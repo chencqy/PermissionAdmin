@@ -1,11 +1,12 @@
 package com.chen.vtg.service.impl;
 
-import com.chen.vtg.entity.PermissionEntity;
-import com.chen.vtg.entity.RoleEntity;
-import com.chen.vtg.entity.UserEntity;
+import com.chen.vtg.entity.*;
+import com.chen.vtg.entity.vo.PageVo;
 import com.chen.vtg.mapper.PermissionEntityMapper;
 import com.chen.vtg.mapper.RoleEntityMapper;
 import com.chen.vtg.mapper.UserEntityMapper;
+import com.chen.vtg.service.ArticleService;
+import com.chen.vtg.service.TagService;
 import com.chen.vtg.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -35,6 +36,12 @@ public class MapperTest {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    ArticleService articleService;
+
+    @Autowired
+    TagService tagService;
 
     @Test
     public void getRoleByUserId() {
@@ -79,5 +86,38 @@ public class MapperTest {
     public void getUserInfo(){
         String accountName = "admin";
         log.info("user:{}", userService.getUserInfo(accountName));
+    }
+
+    @Test
+    public void getArticleList(){
+        PageVo pageVo = new PageVo();
+        pageVo.setPageNum(1);
+        pageVo.setPageSize(20);
+//        log.info("Article:{}", articleService.selectList(pageVo));
+        log.info("Article:{}", articleService.getArticleList(pageVo));
+    }
+
+    @Test
+    public void addTag(){
+        TagEntity tagEntity = new TagEntity();
+        tagEntity.setName("C++");
+        int i = tagService.insert(tagEntity);
+        System.out.println(i);
+    }
+
+    @Test
+    public void addArticle(){
+        ArticleEntity article = new ArticleEntity();
+        article.setUid(1);
+        article.setContent("yes");
+        article.setImage("www.baidu.com");
+        article.setStatus("published");
+        article.setVote(1);
+        article.setCreateTime(LocalDateTime.now());
+        for (int i = 0; i < 16; i++) {
+            article.setId(i + 2);
+            article.setTitle("article" + i);
+            articleService.updateByPrimaryKeySelective(article);
+        }
     }
 }

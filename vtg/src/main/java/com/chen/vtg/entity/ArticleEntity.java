@@ -24,7 +24,7 @@ public class ArticleEntity {
 
     private String image;
 
-    private Integer status;
+    private String status;
 
     private Integer vote;
 

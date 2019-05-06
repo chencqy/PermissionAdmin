@@ -8,9 +8,9 @@ package com.chen.vtg.entity.vo;
  */
 public class PageVo {
 
-    private int pageNum = 1;
+    private int pageNum;
 
-    private int pageSize = 10;
+    private int pageSize;
 
     private String search = null;
 

@@ -19,7 +19,6 @@ router.beforeEach((to, from, next) => {
     } else {
       if (store.getters.roles.length === 0) { // 判断当前用户是否已拉取完user_info信息
         store.dispatch('GetInfo').then(res => { // 拉取user_info
-          debugger
           // 动态设置路由（把上一步获取到的用户传递给 GenerateRoutes方法 解析）
           store.dispatch('GenerateRoutes', store.getters.menus).then(r => {
             // 获取已经解析好的路由列表，动态添加到router中

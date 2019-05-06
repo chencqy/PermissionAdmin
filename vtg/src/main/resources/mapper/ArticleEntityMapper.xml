@@ -7,7 +7,7 @@
         <result column="title" jdbcType="VARCHAR" property="title" />
         <result column="content" jdbcType="LONGVARCHAR" property="content" />
         <result column="image" jdbcType="VARCHAR" property="image" />
-        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
         <result column="vote" jdbcType="INTEGER" property="vote" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     </resultMap>
@@ -18,7 +18,7 @@
         <result column="title" jdbcType="VARCHAR" property="title" />
         <result column="content" jdbcType="LONGVARCHAR" property="content" />
         <result column="image" jdbcType="VARCHAR" property="image" />
-        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
         <result column="vote" jdbcType="INTEGER" property="vote" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <collection property="tags" ofType="com.chen.vtg.entity.TagEntity">
@@ -77,7 +77,7 @@
             insert into article (uid, title, content, image,
             status, vote, create_time)
             values (#{uid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR},
-            #{image,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{vote,jdbcType=INTEGER},
+            #{image,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{vote,jdbcType=INTEGER},
             #{createTime,jdbcType=TIMESTAMP})
     </insert>
     <insert id="insertSelective" parameterType="com.chen.vtg.entity.ArticleEntity">
@@ -122,7 +122,7 @@
                 #{image,jdbcType=VARCHAR},
             </if>
             <if test="status != null">
-                #{status,jdbcType=INTEGER},
+                #{status,jdbcType=VARCHAR},
             </if>
             <if test="vote != null">
                 #{vote,jdbcType=INTEGER},
@@ -148,7 +148,7 @@
                 image = #{image,jdbcType=VARCHAR},
             </if>
             <if test="status != null">
-                status = #{status,jdbcType=INTEGER},
+                status = #{status,jdbcType=VARCHAR},
             </if>
             <if test="vote != null">
                 vote = #{vote,jdbcType=INTEGER},
@@ -162,11 +162,10 @@
     <update id="updateByPrimaryKey" parameterType="com.chen.vtg.entity.ArticleEntity">
     update article
     set uid = #{uid,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
       content = #{content,jdbcType=LONGVARCHAR},
       image = #{image,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
       vote = #{vote,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

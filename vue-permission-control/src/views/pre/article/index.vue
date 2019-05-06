@@ -9,7 +9,7 @@
 
       <el-table-column width="180px" align="center" label="Date">
         <template slot-scope="scope">
-          <span>{{ scope.row.timestamp | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+          <span>{{ scope.row.createTime | parseTime('{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
 
@@ -19,9 +19,9 @@
         </template>
       </el-table-column>
 
-      <el-table-column width="100px" label="Importance">
+      <el-table-column width="100px" label="Vote">
         <template slot-scope="scope">
-          <svg-icon v-for="n in +scope.row.importance" :key="n" icon-class="star" class="meta-item__icon" />
+          <svg-icon v-for="n in +scope.row.vote" :key="n" icon-class="star" class="meta-item__icon" />
         </template>
       </el-table-column>
 
@@ -52,7 +52,7 @@
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" :page.sync="listQuery.pageNum" :limit.sync="listQuery.pageSize" @pagination="getList" />
   </div>
 </template>
 
@@ -79,8 +79,8 @@ export default {
       total: 0,
       listLoading: true,
       listQuery: {
-        page: 1,
-        limit: 20
+        pageNum: 1,
+        pageSize: 20
       }
     }
   },
@@ -90,8 +90,9 @@ export default {
   methods: {
     getList() {
       this.listLoading = true
-      getArticleList().then(response => {
-        this.list = response.data.items
+      getArticleList(this.listQuery).then(response => {
+        debugger
+        this.list = response.data.list
         this.total = response.data.total
         this.listLoading = false
       })
