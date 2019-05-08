@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ArticleEntityMapper extends BaseMapper<ArticleEntity, String> {
+public interface ArticleEntityMapper extends BaseMapper<ArticleEntity, Integer> {
 
     /**
      * @param title
@@ -26,4 +26,11 @@ public interface ArticleEntityMapper extends BaseMapper<ArticleEntity, String> {
      * @return List<ArticleVo>
      */
     List<ArticleVo> getArticleList();
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    ArticleVo getArticleById(Integer id);
 }

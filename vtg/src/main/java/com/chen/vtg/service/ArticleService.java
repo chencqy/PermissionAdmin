@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface ArticleService extends BaseService<ArticleEntity, String> {
+public interface ArticleService extends BaseService<ArticleEntity, Integer> {
 
     /**
      * @param title
@@ -29,5 +29,12 @@ public interface ArticleService extends BaseService<ArticleEntity, String> {
      * @return PageInfo<ArticleEntity>
      */
     PageInfo<ArticleVo> getArticleList(PageVo page);
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    ArticleVo getArticleById(Integer id);
 
 }

@@ -20,7 +20,7 @@ import java.util.List;
  * @Modify by :
  */
 @Service
-public class ArticleServiceImpl extends BaseServiceImpl<ArticleEntity, String, ArticleEntityMapper> implements ArticleService {
+public class ArticleServiceImpl extends BaseServiceImpl<ArticleEntity, Integer, ArticleEntityMapper> implements ArticleService {
 
     @Autowired
     ArticleEntityMapper articleEntityMapper;
@@ -39,5 +39,10 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleEntity, String, A
     public PageInfo<ArticleVo> getArticleList(PageVo page) {
         return PageHelper.startPage(page.getPageNum(), page.getPageSize()).
                 doSelectPageInfo(() -> articleEntityMapper.getArticleList());
+    }
+
+    @Override
+    public ArticleVo getArticleById(Integer id) {
+        return articleEntityMapper.getArticleById(id);
     }
 }

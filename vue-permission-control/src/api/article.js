@@ -7,3 +7,19 @@ export function getArticleList(query) {
     params: query
   })
 }
+
+export function fetchArticle(id) {
+  return request({
+    url: '/article/detail',
+    method: 'get',
+    params: id
+  })
+}
+
+export function addArticle(article) {
+  return request({
+    url: '/article/add',
+    method: 'post',
+    data: article
+  })
+}

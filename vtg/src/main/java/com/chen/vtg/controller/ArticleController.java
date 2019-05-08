@@ -11,9 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author : Chen
@@ -24,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api("文章接口")
 @RestController
 @RequestMapping("/article")
-public class ArticleController extends BaseController<ArticleEntity, String, ArticleService> {
+public class ArticleController extends BaseController<ArticleEntity, Integer, ArticleService> {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -41,6 +39,23 @@ public class ArticleController extends BaseController<ArticleEntity, String, Art
     public PageInfo<ArticleVo> selectList(PageVo page) {
         PageInfo<ArticleVo> articleLists = articleService.getArticleList(page);
         return articleLists;
+    }
+
+
+    @ApiOperation(value = "获取文章详情", notes = "根据文章id获取文章详情")
+    @GetMapping("/detail")
+    public ArticleVo getArticleById(Integer id) {
+        ArticleVo article = articleService.getArticleById(id);
+        return article;
+    }
+
+    @ApiOperation(value = "添加文章", notes = "添加新的文章")
+    @PostMapping("/add")
+    public int insertArticle(@RequestBody ArticleEntity article) {
+        /**
+         * 成功返回1
+         */
+        return articleService.insertSelective(article);
     }
 
 }

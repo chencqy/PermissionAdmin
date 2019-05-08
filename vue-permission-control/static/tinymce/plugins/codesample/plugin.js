@@ -107,7 +107,7 @@ var codesample = (function (domGlobals) {
       },
       plugins: {},
       highlightAll: function (async, callback) {
-        var elements = domGlobals.document.querySelectorAll('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code');
+        var elements = domGlobals.document.querySelectorAll('code[class*="language-"], [class*="language-"] code, code[class*="langs-"], [class*="langs-"] code');
         for (var i = 0, element = void 0; element = elements[i++];) {
           _.highlightElement(element, async === true, callback);
         }

@@ -31,11 +31,6 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     MyAuthenticationFailureHandler myAuthenticationFailureHandler;
 
-//    @Autowired
-//    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(myUserDetailService);
-//    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http

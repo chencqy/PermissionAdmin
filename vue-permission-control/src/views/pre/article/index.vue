@@ -9,7 +9,7 @@
 
       <el-table-column width="180px" align="center" label="Date">
         <template slot-scope="scope">
-          <span>{{ scope.row.createTime | parseTime('{y}-{m}-{d} {h}:{i}:{s}') }}</span>
+          <span>{{ scope.row.createTime | formatDate }}</span>
         </template>
       </el-table-column>
 
@@ -45,7 +45,7 @@
         <template slot-scope="scope">
           <router-link :to="'/example/edit/'+scope.row.id">
             <el-button type="primary" size="small" icon="el-icon-edit">
-              Edit
+              编辑
             </el-button>
           </router-link>
         </template>
@@ -64,6 +64,10 @@ export default {
   name: 'ArticleList',
   components: { Pagination },
   filters: {
+    formatDate(time) {
+      const moment = require('moment')
+      return moment(time).format('YYYY-MM-DD HH:mm:ss')
+    },
     statusFilter(status) {
       const statusMap = {
         published: 'success',

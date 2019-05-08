@@ -120,7 +120,7 @@ var fullpage = (function (domGlobals) {
       });
       elm = headerFragment.getAll('html')[0];
       if (elm) {
-        data.langcode = getAttr(elm, 'lang') || getAttr(elm, 'xml:lang');
+        data.langcode = getAttr(elm, 'lang') || getAttr(elm, 'xml:langs');
       }
       data.stylesheets = [];
       global$1.each(headerFragment.getAll('link'), function (link) {
@@ -282,7 +282,7 @@ var fullpage = (function (domGlobals) {
       elm = headerFragment.getAll('html')[0];
       if (elm) {
         setAttr(elm, 'lang', data.langcode);
-        setAttr(elm, 'xml:lang', data.langcode);
+        setAttr(elm, 'xml:langs', data.langcode);
       }
       if (!headElement.firstChild) {
         headElement.remove();
