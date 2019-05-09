@@ -4,7 +4,9 @@ import com.chen.vtg.base.controller.BaseController;
 import com.chen.vtg.entity.ArticleEntity;
 import com.chen.vtg.entity.vo.ArticleVo;
 import com.chen.vtg.entity.vo.PageVo;
+import com.chen.vtg.entity.vo.UserVo;
 import com.chen.vtg.service.ArticleService;
+import com.chen.vtg.service.UserService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,6 +31,9 @@ public class ArticleController extends BaseController<ArticleEntity, Integer, Ar
     @Autowired
     private ArticleService articleService;
 
+    @Autowired
+    private UserService userService;
+
     /**
      *
      * @param page
@@ -51,11 +56,19 @@ public class ArticleController extends BaseController<ArticleEntity, Integer, Ar
 
     @ApiOperation(value = "添加文章", notes = "添加新的文章")
     @PostMapping("/add")
-    public int insertArticle(@RequestBody ArticleEntity article) {
+    public int insertArticle(@RequestBody ArticleVo article) {
+        UserVo user = userService.getUserInfo(article.getAuthor());
+        ArticleEntity articleEntity = new ArticleEntity();
+        articleEntity.setTitle(article.getTitle());
+        articleEntity.setContent(article.getContent());
+        articleEntity.setImage(article.getImage());
+        articleEntity.setVote(article.getVote());
+        articleEntity.setCreateTime(article.getCreateTime());
+        articleEntity.setUid(user.getId());
         /**
          * 成功返回1
          */
-        return articleService.insertSelective(article);
+        return articleService.insertSelective(articleEntity);
     }
 
 }
