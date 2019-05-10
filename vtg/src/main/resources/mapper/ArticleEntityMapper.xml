@@ -5,6 +5,7 @@
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="uid" jdbcType="INTEGER" property="uid" />
         <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="author" jdbcType="VARCHAR" property="author" />
         <result column="content" jdbcType="LONGVARCHAR" property="content" />
         <result column="image" jdbcType="VARCHAR" property="image" />
         <result column="status" jdbcType="VARCHAR" property="status" />
@@ -27,7 +28,7 @@
         </collection>
     </resultMap>
     <sql id="Base_Column_List">
-        id, uid, title, content, image, status, vote, create_time
+        id, uid, title, author, content, image, status, vote, create_time
     </sql>
 
     <select id="getArticleByTitle" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -84,11 +85,11 @@
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
-            insert into article (uid, title, content, image,
+            insert into article (uid, title, author, content, image,
             status, vote, create_time)
-            values (#{uid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR},
-            #{image,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{vote,jdbcType=INTEGER},
-            #{createTime,jdbcType=TIMESTAMP})
+            values (#{uid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
+            #{content,jdbcType=LONGVARCHAR}, #{image,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+            #{vote,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
     </insert>
     <insert id="insertSelective" parameterType="com.chen.vtg.entity.ArticleEntity">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -101,6 +102,9 @@
             </if>
             <if test="title != null">
                 title,
+            </if>
+            <if test="author != null">
+                author,
             </if>
             <if test="content != null">
                 content,
@@ -124,6 +128,9 @@
             </if>
             <if test="title != null">
                 #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="author != null">
+                #{author,jdbcType=VARCHAR},
             </if>
             <if test="content != null">
                 #{content,jdbcType=LONGVARCHAR},
@@ -151,6 +158,9 @@
             <if test="title != null">
                 title = #{title,jdbcType=VARCHAR},
             </if>
+            <if test="author != null">
+                author = #{author,jdbcType=VARCHAR},
+            </if>
             <if test="content != null">
                 content = #{content,jdbcType=LONGVARCHAR},
             </if>
@@ -173,6 +183,7 @@
     update article
     set uid = #{uid,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
       content = #{content,jdbcType=LONGVARCHAR},
       image = #{image,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},

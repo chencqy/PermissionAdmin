@@ -56,19 +56,13 @@ public class ArticleController extends BaseController<ArticleEntity, Integer, Ar
 
     @ApiOperation(value = "添加文章", notes = "添加新的文章")
     @PostMapping("/add")
-    public int insertArticle(@RequestBody ArticleVo article) {
+    public int insertArticle(@RequestBody ArticleEntity article) {
         UserVo user = userService.getUserInfo(article.getAuthor());
-        ArticleEntity articleEntity = new ArticleEntity();
-        articleEntity.setTitle(article.getTitle());
-        articleEntity.setContent(article.getContent());
-        articleEntity.setImage(article.getImage());
-        articleEntity.setVote(article.getVote());
-        articleEntity.setCreateTime(article.getCreateTime());
-        articleEntity.setUid(user.getId());
+        article.setUid(user.getId());
         /**
          * 成功返回1
          */
-        return articleService.insertSelective(articleEntity);
+        return articleService.insertSelective(article);
     }
 
 }

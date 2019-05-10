@@ -20,6 +20,8 @@ public class ArticleEntity {
 
     private String title;
 
+    private String author;
+
     private String content;
 
     private String image;
