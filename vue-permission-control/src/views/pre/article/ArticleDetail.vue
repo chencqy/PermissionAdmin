@@ -101,6 +101,7 @@ export default {
   computed: {},
   created() {
     if (this.isEdit) {
+      debugger
       const id = this.$route.params && this.$route.params.id
       this.fetchData(id)
     } else {
@@ -113,8 +114,6 @@ export default {
     fetchData(id) {
       fetchArticle(id).then(response => {
         this.postForm = response.data
-        // Just for test
-        this.postForm.title += `   Article Id:${this.postForm.id}`
       }).catch(err => {
         console.log(err)
       })

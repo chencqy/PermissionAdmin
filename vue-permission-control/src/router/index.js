@@ -54,19 +54,30 @@ export const constantRouterMap = [
         name: 'detail',
         meta: {
           // resources: '',
-          title: '文章详情',
+          title: '新建文章',
           icon: 'edit'
         }
       },
       {
         path: 'list',
-        component: () => import('@/views/pre/article/index'),
+        component: () => import('@/views/pre/article/list'),
         name: 'list',
         meta: {
           // resources: '',
           title: '文章列表',
           icon: 'edit'
         }
+      },
+      {
+        path: 'edit/:id(\\d+)',
+        component: () => import('@/views/pre/article/edit'),
+        name: 'EditArticle',
+        meta: {
+          title: 'editArticle',
+          noCache: true,
+          activeMenu: '/article/list'
+        },
+        hidden: true
       }
     ]
   }
