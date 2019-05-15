@@ -49,9 +49,19 @@ export const constantRouterMap = [
     },
     children: [
       {
+        path: 'card',
+        component: () => import('@/views/pre/article/card'),
+        name: 'Card',
+        meta: {
+          // resources: '',
+          title: '文章展示',
+          icon: 'edit'
+        }
+      },
+      {
         path: 'detail',
         component: () => import('@/views/pre/article/ArticleDetail'),
-        name: 'detail',
+        name: 'Detail',
         meta: {
           // resources: '',
           title: '新建文章',
@@ -61,7 +71,7 @@ export const constantRouterMap = [
       {
         path: 'list',
         component: () => import('@/views/pre/article/list'),
-        name: 'list',
+        name: 'List',
         meta: {
           // resources: '',
           title: '文章列表',
