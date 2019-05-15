@@ -39,12 +39,13 @@
     </select>
 
     <select id="getArticleList" resultMap="FullResultMap">
-        SELECT a.id, a.uid, u.name AS author, a.title, a.content, a.image, a.status, a.vote, a.create_time,
+        SELECT a.id, a.uid, a.author, a.title, a.content, a.image, a.status, a.vote, a.create_time,
                t.id AS tid, t.name
         FROM article AS a
         LEFT JOIN tag_article AS tagr ON a.id = tagr.aid
         LEFT JOIN tag AS t ON t.id = tagr.tid
         LEFT JOIN t_user AS u ON a.uid = u.id
+        ORDER BY a.create_time DESC
     </select>
 
 
@@ -61,7 +62,7 @@
     </select>
 
     <select id="getArticleById" parameterType="java.lang.Integer" resultMap="FullResultMap">
-        SELECT a.id, a.uid, u.name AS author, a.title, a.content, a.image, a.status, a.vote, a.create_time,
+        SELECT a.id, a.uid, a.author AS author, a.title, a.content, a.image, a.status, a.vote, a.create_time,
                t.id AS tid, t.name
         FROM article AS a
         LEFT JOIN tag_article AS tagr ON a.id = tagr.aid
