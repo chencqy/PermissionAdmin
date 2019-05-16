@@ -59,6 +59,19 @@ export const constantRouterMap = [
         }
       },
       {
+        path: 'view/:id(\\d+)',
+        component: () => import('@/views/pre/article/ArticleView'),
+        name: 'View',
+        meta: {
+          // resources: '',
+          title: '文章详情',
+          noCache: true,
+          activeMenu: '/article/card',
+          icon: 'edit'
+        },
+        hidden: true
+      },
+      {
         path: 'detail',
         component: () => import('@/views/pre/article/ArticleDetail'),
         name: 'Detail',

@@ -8,7 +8,9 @@
             <span>{{ item.title }}</span>
             <div class="bottom clearfix">
               <time class="time">{{ item.createTime | formatDate }}</time>
-              <el-button type="text" class="button">详情</el-button>
+              <router-link :to="'/article/view/'+item.id">
+                <el-button type="text" class="button">详情</el-button>
+              </router-link>
             </div>
           </div>
         </el-card>

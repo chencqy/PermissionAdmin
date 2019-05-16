@@ -101,7 +101,6 @@ export default {
   computed: {},
   created() {
     if (this.isEdit) {
-      debugger
       const id = this.$route.params && this.$route.params.id
       this.fetchData(id)
     } else {
@@ -119,10 +118,8 @@ export default {
       })
     },
     submitForm(postForm) {
-      debugger
       this.$refs.postForm.validate(valid => {
         if (valid) {
-          debugger
           this.loading = true
           this.postForm.status = 'published'
           addArticle(this.postForm).then(response => {
