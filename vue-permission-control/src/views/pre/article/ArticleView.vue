@@ -2,8 +2,8 @@
   <div class="main container">
     <div class="news_details">
       <div v-loading="listLoading" :data="list" >
-        <div class="h2_title">{{ list.title }}</div>
-        <span style="text-align: center">发布时间: {{ list.createTime | formatDate }}</span>
+        <h1>{{ list.title }}</h1>
+        <p style="text-align: center; font-size: 15px" >发布时间: {{ list.createTime | formatDate }}</p>
         <div class="news_content" >
           <p v-html="list.content"/>
         </div>
@@ -53,10 +53,14 @@ export default {
 </script>
 
 <style scoped>
-.h2_title {
+h1 {
   text-align: center;
-  line-height: 50px;
   font-size: 220%;
+}
 
+.news_content {
+  padding: 50px;
+  margin: 10px;
+  line-height: 2;
 }
 </style>
