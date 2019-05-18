@@ -50,6 +50,7 @@ import Tinymce from '@/components/TinyMCE'
 // import { validURL } from '@/utils/validate'
 import { fetchArticle } from '@/api/article'
 import { addArticle } from '@/api/article'
+import { updateArticle } from '@/api/article'
 
 const defaultForm = {
   id: null,
@@ -122,17 +123,31 @@ export default {
         if (valid) {
           this.loading = true
           this.postForm.status = 'published'
-          addArticle(this.postForm).then(response => {
-            this.$notify({
-              title: '成功',
-              message: '发布文章成功',
-              type: 'success',
-              duration: 2000
+          if (this.isEdit) {
+            updateArticle(this.postForm).then(response => {
+              this.$notify({
+                title: '成功',
+                message: '更新文章成功',
+                type: 'success',
+                duration: 2000
+              })
+              this.loading = false
+            }).catch(err => {
+              console.log(err)
             })
-            this.loading = false
-          }).catch(err => {
-            console.log(err)
-          })
+          } else {
+            addArticle(this.postForm).then(response => {
+              this.$notify({
+                title: '成功',
+                message: '发布文章成功',
+                type: 'success',
+                duration: 2000
+              })
+              this.loading = false
+            }).catch(err => {
+              console.log(err)
+            })
+          }
         } else {
           console.log('error submit!!')
           return false

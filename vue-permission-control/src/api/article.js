@@ -23,3 +23,11 @@ export function addArticle(article) {
     data: article
   })
 }
+
+export function updateArticle(article) {
+  return request({
+    url: '/article/update',
+    method: 'post',
+    data: article
+  })
+}

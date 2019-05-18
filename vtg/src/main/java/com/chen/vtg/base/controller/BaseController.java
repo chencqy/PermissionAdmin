@@ -34,7 +34,7 @@ public class BaseController<T, K, S extends BaseService<T, K>> {
     @PostMapping("/update")
     public Integer update(@RequestBody T entity) {
         log.info("update :{}", entity);
-        return baseService.updateByPrimaryKey(entity);
+        return baseService.updateByPrimaryKeySelective(entity);
     }
 
     @DeleteMapping("/{id}")
