@@ -43,7 +43,6 @@ export default {
     fetchData(id) {
       fetchArticle(id).then(response => {
         this.list = response.data
-        debugger
       }).catch(err => {
         console.log(err)
       })

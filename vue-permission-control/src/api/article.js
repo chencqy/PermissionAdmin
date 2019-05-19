@@ -31,3 +31,10 @@ export function updateArticle(article) {
     data: article
   })
 }
+
+export function deleteArticle(id) {
+  return request({
+    url: '/article/' + id,
+    method: 'delete'
+  })
+}

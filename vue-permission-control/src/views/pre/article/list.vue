@@ -50,6 +50,13 @@
           </router-link>
         </template>
       </el-table-column>
+      <el-table-column align="center" label="Actions" width="120">
+        <template slot-scope="scope">
+          <el-button type="danger" size="small" icon="el-icon-delete" @click="deleteArticle(scope.row.id)">
+            删除
+          </el-button>
+        </template>
+      </el-table-column>
     </el-table>
 
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.pageNum" :limit.sync="listQuery.pageSize" @pagination="getList" />
@@ -58,6 +65,7 @@
 
 <script>
 import { getArticleList } from '@/api/article'
+import { deleteArticle } from '@/api/article'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
 
 export default {
@@ -95,11 +103,25 @@ export default {
     getList() {
       this.listLoading = true
       getArticleList(this.listQuery).then(response => {
-        debugger
         this.list = response.data.list
         this.total = response.data.total
         this.listLoading = false
       })
+    },
+    deleteArticle(id) {
+      this.listLoading = true
+      deleteArticle(id).then(response => {
+        this.$notify({
+          title: '成功',
+          message: '删除文章成功',
+          type: 'success',
+          duration: 2000
+        })
+        this.loading = false
+      }).catch(err => {
+        console.log(err)
+      })
+      this.$router.go(0)
     }
   }
 }
