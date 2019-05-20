@@ -45,4 +45,10 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleEntity, Integer, 
     public ArticleVo getArticleById(Integer id) {
         return articleEntityMapper.getArticleById(id);
     }
+
+    @Override
+    public PageInfo<ArticleVo> getArticleListSelective(PageVo page) {
+        return PageHelper.startPage(page.getPageNum(), page.getPageSize()).
+                doSelectPageInfo(() -> articleEntityMapper.getArticleListSelective());
+    }
 }

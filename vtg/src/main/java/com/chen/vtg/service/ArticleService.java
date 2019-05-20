@@ -33,8 +33,15 @@ public interface ArticleService extends BaseService<ArticleEntity, Integer> {
     /**
      *
      * @param id
-     * @return
+     * @return ArticleVo
      */
     ArticleVo getArticleById(Integer id);
+
+    /**
+     *
+     * @param page
+     * @return PageInfo<ArticleVo>
+     */
+    PageInfo<ArticleVo> getArticleListSelective(PageVo page);
 
 }

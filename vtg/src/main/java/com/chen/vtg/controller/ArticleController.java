@@ -46,6 +46,17 @@ public class ArticleController extends BaseController<ArticleEntity, Integer, Ar
         return articleLists;
     }
 
+    /**
+     *
+     * @param page
+     * @return PageInfo<ArticleVo>
+     */
+    @ApiOperation(value = "查询文章", notes = "查询所有文章")
+    @GetMapping("/search")
+    public PageInfo<ArticleVo> searchArticle(PageVo page) {
+        PageInfo<ArticleVo> articleLists = articleService.getArticleListSelective(page);
+        return articleLists;
+    }
 
     @ApiOperation(value = "获取文章详情", notes = "根据文章id获取文章详情")
     @GetMapping("/detail")
