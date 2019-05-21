@@ -42,6 +42,6 @@ public interface ArticleService extends BaseService<ArticleEntity, Integer> {
      * @param page
      * @return PageInfo<ArticleVo>
      */
-    PageInfo<ArticleVo> getArticleListSelective(PageVo page);
+    PageInfo<ArticleVo> getArticleListSelective(PageVo page, ArticleVo articleVo);
 
 }

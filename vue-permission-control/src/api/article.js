@@ -8,11 +8,17 @@ export function getArticleList(query) {
   })
 }
 
-export function searchArticleList(query) {
+export function searchArticleList(query, list) {
   return request({
     url: '/article/search',
     method: 'get',
-    params: query
+    params: {
+      pageNum: query.pageNum,
+      pageSize: query.pageSize,
+      title: list.title,
+      author: list.author,
+      status: list.status
+    }
   })
 }
 

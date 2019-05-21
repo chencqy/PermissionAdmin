@@ -1,27 +1,27 @@
 <template>
   <div class="app-container">
     <div class="article-container">
-      <el-form ref="list" :model="list" class="form-container">
+      <el-form ref="condition" :model="condition" class="form-container">
         <el-row>
           <el-col :span="20">
             <el-form-item label-width="60px" label="Title:" >
-              <el-input v-model="list.title" placeholder="title"/>
+              <el-input v-model="condition.title" placeholder="title"/>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="10">
             <el-form-item label-width="60px" label="Author:" >
-              <el-input v-model="list.author" placeholder="author"/>
+              <el-input v-model="condition.author" placeholder="author"/>
             </el-form-item>
           </el-col>
           <el-col :span="10">
             <el-form-item label-width="60px" label="Status:" >
-              <el-input v-model="list.status" placeholder="status"/>
+              <el-input v-model="condition.status" placeholder="status"/>
             </el-form-item>
           </el-col>
         </el-row>
-        <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="searchArticle(list)">
+        <el-button v-loading="listLoading" style="margin-left: 10px;" type="success" @click="searchArticle(condition)">
           搜索
         </el-button>
       </el-form>
@@ -114,6 +114,11 @@ export default {
   data() {
     return {
       list: null,
+      condition: {
+        title: '',
+        author: '',
+        status: ''
+      },
       total: 0,
       listLoading: true,
       listQuery: {
@@ -134,9 +139,9 @@ export default {
         this.listLoading = false
       })
     },
-    searchArticle() {
+    searchArticle(condition) {
       this.listLoading = true
-      searchArticleList(this.listQuery).then(response => {
+      searchArticleList(this.listQuery, condition).then(response => {
         this.list = response.data.list
         this.total = response.data.total
         this.listLoading = false

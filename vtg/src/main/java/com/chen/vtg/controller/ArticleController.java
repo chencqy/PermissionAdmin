@@ -48,13 +48,26 @@ public class ArticleController extends BaseController<ArticleEntity, Integer, Ar
 
     /**
      *
-     * @param page
+     * @param pageNum
+     * @param pageSize
+     * @param title
+     * @param author
+     * @param status
      * @return PageInfo<ArticleVo>
      */
-    @ApiOperation(value = "查询文章", notes = "查询所有文章")
+    @ApiOperation(value = "搜索文章", notes = "条件查询文章")
     @GetMapping("/search")
-    public PageInfo<ArticleVo> searchArticle(PageVo page) {
-        PageInfo<ArticleVo> articleLists = articleService.getArticleListSelective(page);
+    public PageInfo<ArticleVo> searchArticle(@RequestParam("pageNum")int pageNum, @RequestParam("pageSize")int pageSize,
+                                             @RequestParam("title")String title, @RequestParam("author")String author,
+                                             @RequestParam("status")String status) {
+        PageVo page = new PageVo();
+        page.setPageNum(pageNum);
+        page.setPageSize(pageSize);
+        ArticleVo articleVo = new ArticleVo();
+        articleVo.setTitle(title);
+        articleVo.setAuthor(author);
+        articleVo.setStatus(status);
+        PageInfo<ArticleVo> articleLists = articleService.getArticleListSelective(page, articleVo);
         return articleLists;
     }
 

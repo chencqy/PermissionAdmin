@@ -35,7 +35,8 @@ public interface ArticleEntityMapper extends BaseMapper<ArticleEntity, Integer> 
     ArticleVo getArticleById(Integer id);
 
     /**
+     * @param articleVo
      * @return List<ArticleVo>
      */
-    List<ArticleVo> getArticleListSelective();
+    List<ArticleVo> getArticleListSelective(ArticleVo articleVo);
 }
