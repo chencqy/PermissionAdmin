@@ -12,19 +12,25 @@
         <el-row>
           <el-col :span="10">
             <el-form-item label-width="60px" label="Author:" >
-              <el-input v-model="condition.author" placeholder="author"/>
+              <el-input v-model="condition.author" placeholder="author" />
             </el-form-item>
           </el-col>
           <el-col :span="10">
-            <el-form-item label-width="60px" label="Status:" >
-              <el-input v-model="condition.status" placeholder="status"/>
+            <el-form-item label-width="60px" label="Status:" style="margin-left: 50px">
+              <el-select v-model="condition.status" clearable placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"/>
+              </el-select>
             </el-form-item>
           </el-col>
         </el-row>
-        <el-button v-loading="listLoading" style="margin-left: 10px;" type="success" @click="searchArticle(condition)">
-          搜索
-        </el-button>
       </el-form>
+      <el-button v-loading="listLoading" style="margin-left: 10px; margin-bottom: 20px" type="success" @click="searchArticle(condition)">
+        搜索
+      </el-button>
       <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
         <el-table-column align="center" label="ID" width="80">
           <template slot-scope="scope">
@@ -124,7 +130,15 @@ export default {
       listQuery: {
         pageNum: 1,
         pageSize: 20
-      }
+      },
+      options: [{
+        value: 'published',
+        label: 'published'
+      }, {
+        value: 'draft',
+        label: 'draft'
+      }],
+      value: ''
     }
   },
   created() {
