@@ -12,10 +12,8 @@
         <el-row>
 
           <el-col :span="24">
-            <el-form-item style="margin-bottom: 40px;" prop="title">
-              <el-input v-model="postForm.title" :maxlength="100" type="textarea" autosize name="name" required>
-                Title
-              </el-input>
+            <el-form-item style="margin-bottom: 40px;" prop="title" label="Title">
+              <el-input v-model="postForm.title" :maxlength="100" type="textarea" autosize name="name" required/>
             </el-form-item>
 
             <div class="postInfo-container">

@@ -31,14 +31,20 @@
       <el-button v-loading="listLoading" style="margin-left: 10px; margin-bottom: 20px" type="success" @click="searchArticle(condition)">
         搜索
       </el-button>
-      <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
+      <el-table
+        v-loading="listLoading"
+        :data="list"
+        border
+        fit
+        highlight-current-row
+        style="width: 100%">
         <el-table-column align="center" label="ID" width="80">
           <template slot-scope="scope">
             <span>{{ scope.row.id }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column width="180px" align="center" label="Date">
+        <el-table-column width="180px" align="center" label="Date" prop="date" sortable>
           <template slot-scope="scope">
             <span>{{ scope.row.createTime | formatDate }}</span>
           </template>
@@ -50,7 +56,7 @@
           </template>
         </el-table-column>
 
-        <el-table-column width="100px" label="Vote">
+        <el-table-column width="100px" label="Vote" prop="vote" sortable>
           <template slot-scope="scope">
             <svg-icon v-for="n in +scope.row.vote" :key="n" icon-class="star" class="meta-item__icon" />
           </template>
