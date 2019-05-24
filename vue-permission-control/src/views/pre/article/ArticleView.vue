@@ -3,6 +3,7 @@
     <div class="news_details">
       <div v-loading="listLoading" :data="list" >
         <h1>{{ list.title }}</h1>
+        <p style="text-align: center; font-size: 20px" >作者: {{ list.author }}</p>
         <p style="text-align: center; font-size: 15px" >发布时间: {{ list.createTime | formatDate }}</p>
         <div class="news_content" >
           <p v-html="list.content"/>
