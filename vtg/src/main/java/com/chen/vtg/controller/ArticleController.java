@@ -14,6 +14,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author : Chen
@@ -87,6 +92,17 @@ public class ArticleController extends BaseController<ArticleEntity, Integer, Ar
          * 成功返回1
          */
         return articleService.insertSelective(article);
+    }
+
+    @PostMapping("/article/image/upload")
+    public Map<String, String> uploadImg(MultipartFile image) {
+
+        Map<String, String> resultMap = new HashMap<>();
+        resultMap.put("time", String.valueOf(new Date().getTime()));
+
+        String pictureUrl = articleService.saveImage(image);
+        resultMap.put("url", pictureUrl);
+        return resultMap;
     }
 
 }

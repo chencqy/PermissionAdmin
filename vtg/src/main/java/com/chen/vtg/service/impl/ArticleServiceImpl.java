@@ -6,11 +6,15 @@ import com.chen.vtg.entity.vo.ArticleVo;
 import com.chen.vtg.entity.vo.PageVo;
 import com.chen.vtg.mapper.ArticleEntityMapper;
 import com.chen.vtg.service.ArticleService;
+import com.chen.vtg.utils.ImageUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -50,5 +54,23 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleEntity, Integer, 
     public PageInfo<ArticleVo> getArticleListSelective(PageVo page, ArticleVo articleVo) {
         return PageHelper.startPage(page.getPageNum(), page.getPageSize()).
                 doSelectPageInfo(() -> articleEntityMapper.getArticleListSelective(articleVo));
+    }
+
+    @Override
+    public String saveImage(MultipartFile image) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        String path = "E:\\Program\\image\\" + format;
+
+        String imageUrl = null;
+        try {
+            if (image != null) {
+                String fileName = ImageUtil.saveImg(image, path);
+                imageUrl = path + "\\" + fileName;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return imageUrl;
     }
 }
