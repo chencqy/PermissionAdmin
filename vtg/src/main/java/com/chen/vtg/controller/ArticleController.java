@@ -94,8 +94,8 @@ public class ArticleController extends BaseController<ArticleEntity, Integer, Ar
         return articleService.insertSelective(article);
     }
 
-    @PostMapping("/article/image/upload")
-    public Map<String, String> uploadImg(MultipartFile image) {
+    @PostMapping("/image/upload")
+    public Map<String, String> uploadImg(@RequestParam("file") MultipartFile image) {
 
         Map<String, String> resultMap = new HashMap<>();
         resultMap.put("time", String.valueOf(new Date().getTime()));
