@@ -14,7 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -58,14 +59,16 @@ public class ArticleServiceImpl extends BaseServiceImpl<ArticleEntity, Integer, 
 
     @Override
     public String saveImage(MultipartFile image) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-        String path = "E:\\Program\\image\\" + format;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        LocalDateTime time = LocalDateTime.now();
+        String timePath = time.format(formatter);
+        String path = "E:\\Program\\image\\" + timePath;
 
         String imageUrl = null;
         try {
             if (image != null) {
                 String fileName = ImageUtil.saveImg(image, path);
-                imageUrl = path + "\\" + fileName;
+                imageUrl = "http://localhost/image/" + timePath + "/" + fileName;
             }
         } catch (IOException e) {
             e.printStackTrace();

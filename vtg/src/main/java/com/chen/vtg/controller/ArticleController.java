@@ -94,6 +94,7 @@ public class ArticleController extends BaseController<ArticleEntity, Integer, Ar
         return articleService.insertSelective(article);
     }
 
+    @ApiOperation(value = "上传图片", notes = "上传图片")
     @PostMapping("/image/upload")
     public Map<String, String> uploadImg(@RequestParam("file") MultipartFile image) {
 
