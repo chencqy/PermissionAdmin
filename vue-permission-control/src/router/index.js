@@ -39,25 +39,30 @@ export const constantRouterMap = [
   },
   { path: '*', redirect: '/404', hidden: true },
   {
+    path: '/home',
+    component: Layout,
+    name: 'Home',
+    meta: {
+      title: '今日推荐',
+      icon: 'edit'
+    },
+    children: [
+      {
+        path: 'recommend',
+        component: () => import('@/views/pre/article/card'),
+        name: 'recommend',
+        meta: {}
+      }]
+  },
+  {
     path: '/article',
     component: Layout,
-    // component: () => import('@/views/pre/article/index'),
     name: 'article',
     meta: {
       title: '文章管理',
       icon: 'edit'
     },
     children: [
-      {
-        path: 'card',
-        component: () => import('@/views/pre/article/card'),
-        name: 'Card',
-        meta: {
-          // resources: '',
-          title: '文章展示',
-          icon: 'edit'
-        }
-      },
       {
         path: 'view/:id(\\d+)',
         component: () => import('@/views/pre/article/ArticleView'),
@@ -82,12 +87,12 @@ export const constantRouterMap = [
         }
       },
       {
-        path: 'list',
+        path: 'search',
         component: () => import('@/views/pre/article/list'),
-        name: 'List',
+        name: 'Search',
         meta: {
           // resources: '',
-          title: '文章列表',
+          title: '搜索文章',
           icon: 'edit'
         }
       },
