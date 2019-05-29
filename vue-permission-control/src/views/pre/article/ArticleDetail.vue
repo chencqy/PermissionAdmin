@@ -59,7 +59,7 @@ const defaultForm = {
   image_uri: null, // 文章图片
   status: 'draft',
   createTime: null,
-  vote: 0
+  vote: 1
 }
 
 export default {
