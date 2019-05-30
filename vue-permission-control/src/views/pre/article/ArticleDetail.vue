@@ -15,22 +15,6 @@
             <el-form-item style="margin-bottom: 40px;" prop="title" label="Title">
               <el-input v-model="postForm.title" :maxlength="100" type="textarea" autosize name="name" required/>
             </el-form-item>
-
-            <div class="postInfo-container">
-              <el-row>
-                <el-col :span="8">
-                  <el-form-item label-width="60px" label="Author:" class="postInfo-container-item">
-                    <el-input v-model="postForm.author" placeholder="author"/>
-                  </el-form-item>
-                </el-col>
-
-                <el-col :span="10">
-                  <el-form-item label-width="120px" label="Publish Time:" class="postInfo-container-item">
-                    <el-date-picker v-model="postForm.createTime" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="Select date and time" />
-                  </el-form-item>
-                </el-col>
-              </el-row>
-            </div>
           </el-col>
         </el-row>
 
@@ -44,11 +28,10 @@
 
 <script>
 import Tinymce from '@/components/TinyMCE'
-//  import Upload from '@/components/Upload/SingleImage3'
-// import { validURL } from '@/utils/validate'
 import { fetchArticle } from '@/api/article'
 import { addArticle } from '@/api/article'
 import { updateArticle } from '@/api/article'
+import store from '../../../store'
 
 const defaultForm = {
   id: null,
@@ -100,23 +83,27 @@ export default {
   computed: {},
   created() {
     if (this.isEdit) {
+      debugger
       const id = this.$route.params && this.$route.params.id
       this.fetchData(id)
     } else {
       this.postForm = Object.assign({}, defaultForm)
+      this.postForm.author = store.getters.name
     }
-
     this.tempRoute = Object.assign({}, this.$route)
   },
   methods: {
     fetchData(id) {
       fetchArticle(id).then(response => {
+        debugger
         this.postForm = response.data
       }).catch(err => {
         console.log(err)
       })
     },
     submitForm(postForm) {
+      const moment = require('moment')
+      this.postForm.createTime = moment(new Date()).format('YYYY-MM-DDTHH:mm:ss')
       this.$refs.postForm.validate(valid => {
         if (valid) {
           this.loading = true

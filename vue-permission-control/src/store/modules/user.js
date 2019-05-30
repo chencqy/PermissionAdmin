@@ -52,6 +52,7 @@ const user = {
     GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
         getInfo(state.token).then(response => {
+          debugger
           const data = response.data.data
           if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
             commit('SET_ROLES', data.roles)
@@ -60,7 +61,7 @@ const user = {
           }
           commit('SET_MENUS', data.menus)
           commit('SET_BUTTONS', data.buttons)
-          commit('SET_NAME', data.name)
+          commit('SET_NAME', data.accountName)
           commit('SET_AVATAR', data.avatar)
           resolve(response)
         }).catch(error => {
