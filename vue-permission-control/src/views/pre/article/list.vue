@@ -180,8 +180,7 @@ export default {
       }).catch(err => {
         console.log(err)
       })
-      // TODO: chang to reload()
-      this.$router.go(0)
+      location.reload()
     }
   }
 }

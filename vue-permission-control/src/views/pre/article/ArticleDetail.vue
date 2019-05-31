@@ -83,7 +83,6 @@ export default {
   computed: {},
   created() {
     if (this.isEdit) {
-      debugger
       const id = this.$route.params && this.$route.params.id
       this.fetchData(id)
     } else {
@@ -95,7 +94,6 @@ export default {
   methods: {
     fetchData(id) {
       fetchArticle(id).then(response => {
-        debugger
         this.postForm = response.data
       }).catch(err => {
         console.log(err)
