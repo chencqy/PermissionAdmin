@@ -25,13 +25,18 @@
       </el-form-item>
       <el-form-item>
         <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin">
-          Sign in
+          登录
         </el-button>
       </el-form-item>
       <div class="tips">
         <span style="margin-right:20px;">username: admin</span>
-        <span> password: admin</span>
+        <span> password: 123</span>
       </div>
+      <el-form-item>
+        <el-button type="primary" style="width:100%;" @click.native.prevent="register">
+          注册
+        </el-button>
+      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -101,6 +106,9 @@ export default {
           return false
         }
       })
+    },
+    register() {
+      this.$router.push({ path: this.redirect || '/register' })
     }
   }
 }
