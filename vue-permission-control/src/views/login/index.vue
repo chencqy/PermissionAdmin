@@ -108,7 +108,7 @@ export default {
       })
     },
     register() {
-      this.$router.push({ path: this.redirect || '/register' })
+      this.$router.push({ path: '/register' })
     }
   }
 }

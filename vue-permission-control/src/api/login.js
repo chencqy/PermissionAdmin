@@ -17,6 +17,14 @@ export function login(username, password) {
   })
 }
 
+export function register(user) {
+  return request({
+    url: '/register',
+    method: 'post',
+    data: { user }
+  })
+}
+
 export function getInfo(access_token) {
   return request({
     url: '/user/info',
