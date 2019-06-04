@@ -21,7 +21,7 @@ export function register(user) {
   return request({
     url: '/register',
     method: 'post',
-    data: { user }
+    data: user
   })
 }
 

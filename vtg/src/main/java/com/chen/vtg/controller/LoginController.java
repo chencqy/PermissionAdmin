@@ -28,18 +28,12 @@ public class LoginController {
 
     @ApiOperation(value = "用户注册", notes = "新用户注册")
     @PostMapping("/register")
-    public Result<UserEntity> register(@RequestBody UserEntity userEntity) {
-        if (userEntity == null) {
+    public Result<UserEntity> register(@RequestBody UserEntity user) {
+        if (user == null) {
             logger.info("userEntity is null");
         }
-        userService.insertIntoUser(userEntity);
-        return Result.ok(userEntity);
-    }
-
-    // TODO : 暂时弃用
-    @GetMapping("/login")
-    public Result<Object> login() {
-        return Result.ok(null);
+        userService.insertIntoUser(user);
+        return Result.ok(user);
     }
 
 }

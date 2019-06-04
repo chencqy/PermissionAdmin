@@ -37,7 +37,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity, String, UserEnt
         String password = userEntity.getPassword();
         password = new BCryptPasswordEncoder().encode(password);
         userEntity.setPassword(password);
-        return userEntityMapper.insert(userEntity);
+        return userEntityMapper.insertSelective(userEntity);
     }
 
     @Override
