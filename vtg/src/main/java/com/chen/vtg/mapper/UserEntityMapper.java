@@ -12,4 +12,10 @@ public interface UserEntityMapper extends BaseMapper<UserEntity, String> {
      * @return UserEntity
      */
     UserEntity getUserByAccountName(String accountName);
+
+    /**
+     *
+     * @param userId
+     */
+    void insertUserRoleDefault(Integer userId);
 }

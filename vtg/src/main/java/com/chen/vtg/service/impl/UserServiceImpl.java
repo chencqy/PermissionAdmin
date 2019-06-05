@@ -33,11 +33,13 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity, String, UserEnt
     private RoleEntityMapper roleEntityMapper;
 
     @Override
-    public int insertIntoUser(UserEntity userEntity) {
+    public void insertIntoUser(UserEntity userEntity) {
         String password = userEntity.getPassword();
         password = new BCryptPasswordEncoder().encode(password);
         userEntity.setPassword(password);
-        return userEntityMapper.insertSelective(userEntity);
+        userEntityMapper.insertSelective(userEntity);
+        userEntity = userEntityMapper.getUserByAccountName(userEntity.getAccountName());
+        userEntityMapper.insertUserRoleDefault(userEntity.getId());
     }
 
     @Override

@@ -15,7 +15,7 @@ public interface UserService extends BaseService<UserEntity, String> {
       * @Description :
       * @Create: 2018/8/19 9:58
       */
-    int insertIntoUser(UserEntity userEntity);
+    void insertIntoUser(UserEntity userEntity);
 
     /**
      * @param accountName
