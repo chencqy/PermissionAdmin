@@ -180,7 +180,11 @@ export default {
       }).catch(err => {
         console.log(err)
       })
-      location.reload()
+      const { fullPath } = this.$route
+      this.$router.replace({
+        path: '/redirect' + fullPath
+      })
+      // location.reload()
     }
   }
 }
