@@ -37,6 +37,12 @@
         <span style="margin-right:20px;">username: admin</span>
         <span> password: 123</span>
       </div>
+      <div class="social-signup-container">
+        <span class="signup-font">第三方登录：</span>
+        <div class="sign-btn" @click="githubHandleClick('github')">
+          <span class="github-svg-container"><svg-icon icon-class="github" class="icon" /></span>
+        </div>
+      </div>
     </el-form>
   </div>
 </template>
@@ -109,6 +115,14 @@ export default {
     },
     register() {
       this.$router.push({ path: '/register' })
+    },
+    githubHandleClick(thirdpart) {
+      alert('ok')
+      // this.$store.commit('SET_AUTH_TYPE', thirdpart)
+      // const client_id = 'xxxxx'
+      // const redirect_uri = encodeURIComponent('xxx/redirect?redirect=' + window.location.origin + '/auth-redirect')
+      // const url = 'https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + redirect_uri
+      // openWindow(url, thirdpart, 540, 540)
     }
   }
 }
@@ -199,6 +213,36 @@ $light_gray:#eee;
     color: $dark_gray;
     cursor: pointer;
     user-select: none;
+  }
+}
+.social-signup-container {
+  margin: 20px 0;
+  .sign-btn {
+    display: inline-block;
+    cursor: pointer;
+  }
+  .icon {
+    color: #fff;
+    font-size: 24px;
+    margin-top: 8px;
+  }
+  .github-svg-container {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    padding-top: 1px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    margin-right: 5px;
+  }
+  .github-svg-container {
+    background-color: #FFFFFF;
+    margin-left: 10px;
+  }
+  .signup-font {
+    color: #FFFFFF;
   }
 }
 </style>
