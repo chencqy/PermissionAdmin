@@ -32,6 +32,7 @@ public class MyResourceServerConfigurerAdapter extends ResourceServerConfigurerA
                 .antMatchers("/druid/**").permitAll()
                 // TODO: 仅测试时开启
                 .antMatchers("/article/image/upload").permitAll()
+                .antMatchers("/login/github").permitAll()
                 .anyRequest()
                 .authenticated();
     }
