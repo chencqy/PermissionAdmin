@@ -39,7 +39,7 @@
       </div>
       <div class="social-signup-container">
         <span class="signup-font">第三方登录：</span>
-        <a href="https://github.com/login/oauth/authorize?client_id=571f9dcdbf0212c13613">
+        <a href="https://github.com/login/oauth/authorize?client_id=571f9dcdbf0212c13613&state=github">
           <div class="sign-btn">
             <span class="github-svg-container"><svg-icon icon-class="github" class="icon" /></span>
           </div>

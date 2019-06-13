@@ -42,16 +42,6 @@ spring:
     # 合并多个DruidDataSource的监控数据
     useGlobalDataSourceStat: true
 
-github:
-  client:
-    clientId: 571f9dcdbf0212c13613
-    clientSecret: c2a102beaaf9f210c6aa74a46d211b1b0566deca
-    accessTokenUri: https://github.com/login/oauth/access_token
-    userAuthorizationUri: https://github.com/login/oauth/authorize
-    clientAuthenticationScheme: form
-  resource:
-    userInfoUri: https://api.github.com/user
-
   redis:
     #本地redis
     database: 4
