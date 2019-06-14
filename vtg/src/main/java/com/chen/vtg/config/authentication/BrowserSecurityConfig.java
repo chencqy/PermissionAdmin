@@ -24,13 +24,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     MyUserDetailService myUserDetailService;
-
-//    @Autowired
-//    MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
-//
-//    @Autowired
-//    MyAuthenticationFailureHandler myAuthenticationFailureHandler;
-
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -38,10 +32,6 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .formLogin()
-                .loginPage("/login")  //定义当需要用户登录时候，转到的登录页面
-//                .loginProcessingUrl("/login")   // 自定义的登录接口
-//                .successHandler(myAuthenticationSuccessHandler)
-//                .failureHandler(myAuthenticationFailureHandler)
                 .and()
                 .authorizeRequests()
                 .anyRequest()  // 任何请求,登录后可以访问
