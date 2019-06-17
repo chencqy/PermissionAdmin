@@ -156,16 +156,6 @@ export const asyncRouterMap = [
         meta: {
           resources: 'role'
         }
-      },
-      {
-        path: 'article',
-        component: Layout,
-        // component: () => import('@/views/pre/article/index'),
-        name: 'article',
-        meta: {
-          resources: 'article',
-          title: '文章管理'
-        }
       }
     ]
   },
