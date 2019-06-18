@@ -31,6 +31,7 @@
 import { mapGetters } from 'vuex'
 import store from '../../store'
 import { Message } from 'element-ui'
+import { updateUserInfo } from '@/api/user'
 
 export default {
   name: 'Dashboard',
@@ -39,6 +40,7 @@ export default {
       avatar: '',
       show: false,
       userInfo: {
+        id: null,
         name: null,
         avatar: null,
         email: null,
@@ -70,13 +72,31 @@ export default {
       })
     },
     userInfoSet(e) {
+      debugger
+      this.userInfo.id = e.id
       this.userInfo.avatar = e.avatar
       this.userInfo.name = e.accountName
       this.userInfo.url = e.url
       this.userInfo.email = e.email
+      this.userInfo.info = e.info
     },
     updateInfo() {
-      // TODO: 更新用户信息
+      this.loading = true
+      updateUserInfo(this.userInfo).then(response => {
+        this.$notify({
+          title: '成功',
+          message: '更新用户信息成功',
+          type: 'success',
+          duration: 2000
+        })
+        this.loading = false
+      }).catch(err => {
+        console.log(err)
+      })
+      const { fullPath } = this.$route
+      this.$router.replace({
+        path: '/redirect' + fullPath
+      })
     }
   }
 }

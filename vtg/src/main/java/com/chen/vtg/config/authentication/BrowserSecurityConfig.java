@@ -24,7 +24,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     MyUserDetailService myUserDetailService;
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http

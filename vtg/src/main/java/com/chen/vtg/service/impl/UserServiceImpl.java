@@ -24,7 +24,7 @@ import java.util.List;
  * @Modify by :
  */
 @Service
-public class UserServiceImpl extends BaseServiceImpl<UserEntity, String, UserEntityMapper> implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<UserEntity, Integer, UserEntityMapper> implements UserService {
 
     @Autowired
     private UserEntityMapper userEntityMapper;
@@ -59,10 +59,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity, String, UserEnt
             }
         }));
 
-        UserVo userVo = new UserVo(userEntity.getId(), userEntity.getAccountName(), userEntity.getName(),
-                                   userEntity.getUserType(), userEntity.getMobile(),userEntity.getEmail(),
-                                   userEntity.getUrl(), userEntity.getCreateTime(),
-                                   roles, TreeNode.findRoot(menus), buttons);
+        UserVo userVo = new UserVo(userEntity.getId(), userEntity.getAvatar(), userEntity.getAccountName(),
+                                   userEntity.getName(), userEntity.getUserType(), userEntity.getMobile(),
+                                   userEntity.getEmail(), userEntity.getUrl(), userEntity.getCreateTime(),
+                                   userEntity.getInfo(), roles, TreeNode.findRoot(menus), buttons);
         return userVo;
     }
 

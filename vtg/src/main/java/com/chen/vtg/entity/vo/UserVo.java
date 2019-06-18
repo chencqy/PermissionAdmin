@@ -17,6 +17,8 @@ public class UserVo {
 
     private Integer id;
 
+    private String avatar;
+
     private String accountName;
 
     private String name;
@@ -33,6 +35,8 @@ public class UserVo {
 
     private LocalDateTime createTime;
 
+    private String info;
+
     /**
      * 角色
      */
@@ -48,8 +52,11 @@ public class UserVo {
      */
     private List<ButtonVo> buttons;
 
-    public UserVo(Integer id, String accountName, String name, Integer userType, String mobile, String email, String url, LocalDateTime createTime, List<RoleEntity> roles, List<MenuVo> menus, List<ButtonVo> buttons) {
+    public UserVo(Integer id, String avatar, String accountName, String name, Integer userType, String mobile,
+                  String email, String url, LocalDateTime createTime, String info, List<RoleEntity> roles,
+                  List<MenuVo> menus, List<ButtonVo> buttons) {
         this.id = id;
+        this.avatar = avatar;
         this.accountName = accountName;
         this.name = name;
         this.userType = userType;
@@ -57,6 +64,7 @@ public class UserVo {
         this.email = email;
         this.url = url;
         this.createTime = createTime;
+        this.info = info;
         this.roles = roles;
         this.menus = menus;
         this.buttons = buttons;

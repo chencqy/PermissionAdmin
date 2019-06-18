@@ -88,9 +88,7 @@ public class ArticleController extends BaseController<ArticleEntity, Integer, Ar
     public int insertArticle(@RequestBody ArticleEntity article) {
         UserVo user = userService.getUserInfo(article.getAuthor());
         article.setUid(user.getId());
-        /**
-         * 成功返回1
-         */
+
         return articleService.insertSelective(article);
     }
 

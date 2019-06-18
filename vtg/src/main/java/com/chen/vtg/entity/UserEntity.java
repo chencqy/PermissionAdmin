@@ -9,6 +9,8 @@ public class UserEntity {
 
     private Integer id;
 
+    private String avatar;
+
     private String accountName;
 
     private String name;
@@ -24,6 +26,8 @@ public class UserEntity {
     private String url;
 
     private LocalDateTime createTime;
+
+    private String info;
 
 
 }

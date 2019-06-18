@@ -6,7 +6,7 @@ import com.chen.vtg.entity.vo.UserVo;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface UserService extends BaseService<UserEntity, String> {
+public interface UserService extends BaseService<UserEntity, Integer> {
 
     /**
       * @Author : Chen
