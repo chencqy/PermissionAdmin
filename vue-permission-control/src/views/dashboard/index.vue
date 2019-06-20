@@ -3,8 +3,21 @@
     <div class="dashboard-text" style="text-align: center">Welcome, {{ name }}</div>
     <div class="user-content">
       <div class="avatar" @click="toggleShow()">
+        <!--<img :src="avatar">-->
+        <!--<p class="head-btn" @click="toggleShow()">修改头像</p>-->
+        <p class="head-btn" @click="toggleShow()">设置头像</p>
+        <my-upload field="img"
+                   @crop-success="cropSuccess"
+                   @crop-upload-success="cropUploadSuccess"
+                   @crop-upload-fail="cropUploadFail"
+                   v-model="show"
+                   :width="300"
+                   :height="300"
+                   url="http://localhost/api/article/image/upload"
+                   :params="params"
+                   :headers="headers"
+                   img-format="png"></my-upload>
         <img :src="avatar">
-        <p class="head-btn">修改头像</p>
       </div>
       <div class="info">
         <el-form ref="userInfo" :model="userInfo" label-position="top" label-width="80px">
@@ -32,9 +45,14 @@ import { mapGetters } from 'vuex'
 import store from '../../store'
 import { Message } from 'element-ui'
 import { updateUserInfo } from '@/api/user'
+import myUpload from 'vue-image-crop-upload'
+import "babel-polyfill"
 
 export default {
   name: 'Dashboard',
+  components: {
+    'my-upload': myUpload
+  },
   data() {
     return {
       avatar: '',
@@ -42,7 +60,7 @@ export default {
       userInfo: {
         id: null,
         name: null,
-        avatar: null,
+        avatar: '',
         email: null,
         info: null
       }
@@ -97,6 +115,38 @@ export default {
       this.$router.replace({
         path: '/redirect' + fullPath
       })
+    },
+    /**
+     * crop success
+     *
+     * [param] avatar
+     * [param] field
+     */
+    cropSuccess(avatar, field) {
+      console.log('-------- crop success --------')
+      this.avatar = avatar
+    },
+    /**
+     * upload success
+     *
+     * [param] jsonData   服务器返回数据，已进行json转码
+     * [param] field
+     */
+    cropUploadSuccess(jsonData, field) {
+      console.log('-------- upload success --------')
+      console.log(jsonData)
+      console.log('field: ' + field)
+    },
+    /**
+     * upload fail
+     *
+     * [param] status    server api return error status, like 500
+     * [param] field
+     */
+    cropUploadFail(status, field) {
+      console.log('-------- upload fail --------')
+      console.log(status)
+      console.log('field: ' + field)
     }
   }
 }
