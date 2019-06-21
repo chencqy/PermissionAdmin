@@ -22,4 +22,11 @@ public interface UserService extends BaseService<UserEntity, Integer> {
      * @return UserVo
      */
     UserVo getUserInfo(String accountName);
+
+    /**
+     *
+     * @param userId
+     * @param avatar
+     */
+    void updateUserAvatar(int userId, String avatar);
 }

@@ -31,6 +31,7 @@ public class MyResourceServerConfigurerAdapter extends ResourceServerConfigurerA
                         "/v2/api-docs").permitAll()
                 .antMatchers("/druid/**").permitAll()
                 .antMatchers("/article/image/upload").permitAll()
+                .antMatchers("/user/avatar/upload").permitAll()
                 .antMatchers("/login/github").permitAll()
                 .anyRequest()
                 .authenticated();

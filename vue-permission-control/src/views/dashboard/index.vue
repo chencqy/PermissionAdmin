@@ -7,14 +7,12 @@
         <!--<p class="head-btn" @click="toggleShow()">修改头像</p>-->
         <p class="head-btn" @click="toggleShow()">设置头像</p>
         <my-upload field="img"
-                   @crop-success="cropSuccess"
                    @crop-upload-success="cropUploadSuccess"
                    @crop-upload-fail="cropUploadFail"
                    v-model="show"
                    :width="300"
                    :height="300"
-                   url="http://localhost/api/article/image/upload"
-                   :params="params"
+                   url="http://localhost/api/user/avatar/upload"
                    :headers="headers"
                    img-format="png"></my-upload>
         <img :src="avatar">
@@ -45,7 +43,9 @@ import { mapGetters } from 'vuex'
 import store from '../../store'
 import { Message } from 'element-ui'
 import { updateUserInfo } from '@/api/user'
+import { uploadImage } from '@/api/image'
 import myUpload from 'vue-image-crop-upload'
+import { getToken } from '@/utils/auth'
 import "babel-polyfill"
 
 export default {
@@ -63,6 +63,9 @@ export default {
         avatar: '',
         email: null,
         info: null
+      },
+      headers: {
+        Authorization: 'bearer '+ getToken()
       }
     }
   },
@@ -90,7 +93,6 @@ export default {
       })
     },
     userInfoSet(e) {
-      debugger
       this.userInfo.id = e.id
       this.userInfo.avatar = e.avatar
       this.userInfo.name = e.accountName
@@ -117,25 +119,25 @@ export default {
       })
     },
     /**
-     * crop success
-     *
-     * [param] avatar
-     * [param] field
-     */
-    cropSuccess(avatar, field) {
-      console.log('-------- crop success --------')
-      this.avatar = avatar
-    },
-    /**
      * upload success
      *
      * [param] jsonData   服务器返回数据，已进行json转码
      * [param] field
      */
     cropUploadSuccess(jsonData, field) {
-      console.log('-------- upload success --------')
-      console.log(jsonData)
-      console.log('field: ' + field)
+      uploadImage(jsonData).then(response => {
+        this.avatar = jsonData.data
+        this.show = false
+        this.$notify({
+          title: '成功',
+          message: '更新头像成功',
+          type: 'success',
+          duration: 2000
+        })
+        this.$refs.upload.off()
+      }).catch(err => {
+        console.log(err)
+      })
     },
     /**
      * upload fail
@@ -144,9 +146,12 @@ export default {
      * [param] field
      */
     cropUploadFail(status, field) {
-      console.log('-------- upload fail --------')
-      console.log(status)
-      console.log('field: ' + field)
+      this.$notify({
+        title: '失败',
+        message: '更新头像失败',
+        type: 'error',
+        duration: 2000
+      })
     }
   }
 }

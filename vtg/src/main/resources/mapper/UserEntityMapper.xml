@@ -172,4 +172,12 @@
     INSERT INTO user_role(user_id, role_id)
     VALUES (#{userId,jdbcType=INTEGER}, 2)
   </insert>
+
+  <update id="updateAvatar">
+    update t_user
+    set avatar = #{avatar}
+    <where>
+      id = #{userId}
+    </where>
+  </update>
 </mapper>

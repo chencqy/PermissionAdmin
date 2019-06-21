@@ -66,5 +66,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity, Integer, UserEn
         return userVo;
     }
 
+    @Override
+    public void updateUserAvatar(int userId, String avatar) {
+        userEntityMapper.updateAvatar(userId, avatar);
+    }
+
 
 }
