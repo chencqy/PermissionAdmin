@@ -6,7 +6,8 @@
         <!--<img :src="avatar">-->
         <!--<p class="head-btn" @click="toggleShow()">修改头像</p>-->
         <p class="head-btn" @click="toggleShow()">设置头像</p>
-        <my-upload field="img"
+        <my-upload ref="upload"
+                   field="picture"
                    @crop-upload-success="cropUploadSuccess"
                    @crop-upload-fail="cropUploadFail"
                    v-model="show"
@@ -46,7 +47,7 @@ import { updateUserInfo } from '@/api/user'
 import { uploadImage } from '@/api/image'
 import myUpload from 'vue-image-crop-upload'
 import { getToken } from '@/utils/auth'
-import "babel-polyfill"
+import 'babel-polyfill'
 
 export default {
   name: 'Dashboard',
@@ -65,7 +66,7 @@ export default {
         info: null
       },
       headers: {
-        Authorization: 'bearer '+ getToken()
+        Authorization: 'Bearer ' + getToken()
       }
     }
   },
@@ -125,7 +126,9 @@ export default {
      * [param] field
      */
     cropUploadSuccess(jsonData, field) {
+      debugger
       uploadImage(jsonData).then(response => {
+        debugger
         this.avatar = jsonData.data
         this.show = false
         this.$notify({

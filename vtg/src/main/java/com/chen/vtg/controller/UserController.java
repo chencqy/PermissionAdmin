@@ -46,8 +46,9 @@ public class UserController extends BaseController<UserEntity, Integer, UserServ
     @ApiOperation(value = "更新头像", notes = "更新头像url")
     @PatchMapping("/updateAvatar")
     public Result<String> updateAvatar(@RequestParam("headImg") String headImg) {
-        int userId = SecurityUtil.getId();
-        userService.updateUserAvatar(userId, headImg);
+        String accountName = SecurityUtil.getLoginName();
+        UserVo user = userService.getUserInfo(accountName);
+        userService.updateUserAvatar(user.getId(), headImg);
         return Result.ok(headImg);
     }
 
@@ -55,6 +56,9 @@ public class UserController extends BaseController<UserEntity, Integer, UserServ
     @PostMapping("/avatar/upload")
     public Result<String> uploadUserAvatar(@RequestParam("picture") MultipartFile picture) {
         String pictureUrl = articleService.saveImage(picture);
+        String accountName = SecurityUtil.getLoginName();
+        UserVo user = userService.getUserInfo(accountName);
+        userService.updateUserAvatar(user.getId(), pictureUrl);
         return Result.ok(pictureUrl);
     }
 }

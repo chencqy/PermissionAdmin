@@ -1,8 +1,8 @@
 package com.chen.vtg.utils;
 
-import com.chen.vtg.entity.UserEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 /**
  * @Author : Chen
@@ -12,17 +12,19 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 public class SecurityUtil {
 
+    /**
     public static int getId() {
         Authentication authObj = SecurityContextHolder.getContext().getAuthentication();
-        UserEntity authUser = (UserEntity)authObj.getPrincipal();
-        return Integer.valueOf(authUser.getAccountName());
+        User authUser = (User)authObj.getPrincipal();
+        return Integer.valueOf(authUser.getUsername());
     }
+     */
 
     public static int getIdWithoutException() {
         try {
             Authentication authObj = SecurityContextHolder.getContext().getAuthentication();
-            UserEntity authUser = (UserEntity)authObj.getPrincipal();
-            return Integer.valueOf(authUser.getAccountName());
+            User authUser = (User)authObj.getPrincipal();
+            return Integer.valueOf(authUser.getUsername());
         }catch (Exception ex){
             return 0;
         }
@@ -31,13 +33,13 @@ public class SecurityUtil {
 
     public static String getLoginName() {
         Authentication authObj = SecurityContextHolder.getContext().getAuthentication();
-        UserEntity authUser = (UserEntity)authObj.getPrincipal();
-        return authUser.getAccountName();
+        User authUser = (User)authObj.getPrincipal();
+        return authUser.getUsername();
     }
 
-    public static UserEntity getAuthenticationUser() {
+    public static User getAuthenticationUser() {
         Authentication authObj = SecurityContextHolder.getContext().getAuthentication();
-        UserEntity authUser = (UserEntity)authObj.getPrincipal();
+        User authUser = (User)authObj.getPrincipal();
         return authUser;
     }
 }
