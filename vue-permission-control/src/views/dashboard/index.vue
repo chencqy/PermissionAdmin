@@ -2,9 +2,7 @@
   <div class="dashboard-container">
     <div class="dashboard-text" style="text-align: center">Welcome, {{ name }}</div>
     <div class="user-content">
-      <div class="avatar" @click="toggleShow()">
-        <!--<img :src="avatar">-->
-        <!--<p class="head-btn" @click="toggleShow()">修改头像</p>-->
+      <div class="avatar">
         <p class="head-btn" @click="toggleShow()">设置头像</p>
         <my-upload ref="upload"
                    field="picture"
