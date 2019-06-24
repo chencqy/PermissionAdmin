@@ -6,7 +6,6 @@ import com.chen.vtg.entity.vo.ArticleVo;
 import com.chen.vtg.entity.vo.PageVo;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -44,12 +43,5 @@ public interface ArticleService extends BaseService<ArticleEntity, Integer> {
      * @return PageInfo<ArticleVo>
      */
     PageInfo<ArticleVo> getArticleListSelective(PageVo page, ArticleVo articleVo);
-
-    /**
-     *
-     * @param image
-     * @return
-     */
-    String saveImage(MultipartFile image);
 
 }

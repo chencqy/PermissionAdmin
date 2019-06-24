@@ -32,4 +32,14 @@ public class ImageUtil {
         return fileName;
     }
 
+    public static boolean deleteImg(String filePath) {
+        File file = new File(filePath);
+        if (file.exists() && file.isFile()) {
+            file.delete();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

@@ -6,6 +6,7 @@ import com.chen.vtg.entity.vo.ArticleVo;
 import com.chen.vtg.entity.vo.PageVo;
 import com.chen.vtg.entity.vo.UserVo;
 import com.chen.vtg.service.ArticleService;
+import com.chen.vtg.service.ImageService;
 import com.chen.vtg.service.UserService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
@@ -38,6 +39,9 @@ public class ArticleController extends BaseController<ArticleEntity, Integer, Ar
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ImageService imageService;
 
     /**
      *
@@ -99,7 +103,7 @@ public class ArticleController extends BaseController<ArticleEntity, Integer, Ar
         Map<String, String> resultMap = new HashMap<>();
         resultMap.put("time", String.valueOf(new Date().getTime()));
 
-        String pictureUrl = articleService.saveImage(image);
+        String pictureUrl = imageService.saveImg(image);
         resultMap.put("url", pictureUrl);
         return resultMap;
     }

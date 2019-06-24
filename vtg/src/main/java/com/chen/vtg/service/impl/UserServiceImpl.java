@@ -8,8 +8,11 @@ import com.chen.vtg.entity.vo.MenuVo;
 import com.chen.vtg.entity.vo.UserVo;
 import com.chen.vtg.mapper.RoleEntityMapper;
 import com.chen.vtg.mapper.UserEntityMapper;
+import com.chen.vtg.service.ImageService;
 import com.chen.vtg.service.UserService;
 import com.chen.vtg.utils.TreeNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,11 +29,16 @@ import java.util.List;
 @Service
 public class UserServiceImpl extends BaseServiceImpl<UserEntity, Integer, UserEntityMapper> implements UserService {
 
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
     private UserEntityMapper userEntityMapper;
 
     @Autowired
     private RoleEntityMapper roleEntityMapper;
+
+    @Autowired
+    private ImageService imageService;
 
     @Override
     public void insertIntoUser(UserEntity userEntity) {
@@ -67,7 +75,12 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity, Integer, UserEn
     }
 
     @Override
-    public void updateUserAvatar(int userId, String avatar) {
+    public void updateUserAvatar(int userId, String avatar, String OldAvatar) {
+        if (imageService.deleteImg(OldAvatar)) {
+            logger.info("image: {} delete successfully", OldAvatar);
+        } else {
+            logger.info("image: {} delete failed", OldAvatar);
+        }
         userEntityMapper.updateAvatar(userId, avatar);
     }
 

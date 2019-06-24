@@ -27,6 +27,7 @@ public interface UserService extends BaseService<UserEntity, Integer> {
      *
      * @param userId
      * @param avatar
+     * @param OldAvatar
      */
-    void updateUserAvatar(int userId, String avatar);
+    void updateUserAvatar(int userId, String avatar, String OldAvatar);
 }

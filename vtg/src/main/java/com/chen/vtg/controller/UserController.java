@@ -4,6 +4,7 @@ import com.chen.vtg.base.controller.BaseController;
 import com.chen.vtg.entity.UserEntity;
 import com.chen.vtg.entity.vo.UserVo;
 import com.chen.vtg.service.ArticleService;
+import com.chen.vtg.service.ImageService;
 import com.chen.vtg.service.UserService;
 import com.chen.vtg.utils.Result;
 import com.chen.vtg.utils.SecurityUtil;
@@ -35,6 +36,9 @@ public class UserController extends BaseController<UserEntity, Integer, UserServ
     @Autowired
     ArticleService articleService;
 
+    @Autowired
+    private ImageService imageService;
+
     @ApiOperation(value = "获取用户信息", notes = "通过用户名称获取用户信息")
     @GetMapping("/info")
     public Result<UserVo> userInfo() {
@@ -48,14 +52,15 @@ public class UserController extends BaseController<UserEntity, Integer, UserServ
     public Result<String> updateAvatar(@RequestParam("headImg") String headImg) {
         String accountName = SecurityUtil.getLoginName();
         UserVo user = userService.getUserInfo(accountName);
-        userService.updateUserAvatar(user.getId(), headImg);
+        String OldAvatar = user.getAvatar();
+        userService.updateUserAvatar(user.getId(), headImg, OldAvatar);
         return Result.ok(headImg);
     }
 
     @ApiOperation(value = "上传头像", notes = "上传头像图片源文件到服务器")
     @PostMapping("/avatar/upload")
     public Result<String> uploadUserAvatar(@RequestParam("picture") MultipartFile picture) {
-        String pictureUrl = articleService.saveImage(picture);
+        String pictureUrl = imageService.saveImg(picture);
         return Result.ok(pictureUrl);
     }
 }
