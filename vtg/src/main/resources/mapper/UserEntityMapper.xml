@@ -18,6 +18,12 @@
     id, avatar, account_name, name, user_type, mobile, password, email, url, create_time, info
   </sql>
 
+  <select id="selectList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+  </select>
+
   <select id="getUserByAccountName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

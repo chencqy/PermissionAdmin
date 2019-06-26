@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserEntityMapper extends BaseMapper<UserEntity, String> {
+public interface UserEntityMapper extends BaseMapper<UserEntity, Integer> {
 
     /**
      * @param accountName

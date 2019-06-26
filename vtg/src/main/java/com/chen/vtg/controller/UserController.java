@@ -2,12 +2,14 @@ package com.chen.vtg.controller;
 
 import com.chen.vtg.base.controller.BaseController;
 import com.chen.vtg.entity.UserEntity;
+import com.chen.vtg.entity.vo.PageVo;
 import com.chen.vtg.entity.vo.UserVo;
 import com.chen.vtg.service.ArticleService;
 import com.chen.vtg.service.ImageService;
 import com.chen.vtg.service.UserService;
 import com.chen.vtg.utils.Result;
 import com.chen.vtg.utils.SecurityUtil;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -62,5 +64,12 @@ public class UserController extends BaseController<UserEntity, Integer, UserServ
     public Result<String> uploadUserAvatar(@RequestParam("picture") MultipartFile picture) {
         String pictureUrl = imageService.saveImg(picture);
         return Result.ok(pictureUrl);
+    }
+
+    @ApiOperation(value = "查询用户", notes = "查询所有用户")
+    @GetMapping("/list")
+    public PageInfo<UserEntity> selectList(PageVo page) {
+        PageInfo<UserEntity> userLists = userService.selectList(page);
+        return userLists;
     }
 }
