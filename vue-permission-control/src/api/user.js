@@ -29,3 +29,10 @@ export function getUserList(query) {
     params: query
   })
 }
+
+export function deleteUser(id) {
+  return request({
+    url: '/user/' + id,
+    method: 'delete'
+  })
+}
