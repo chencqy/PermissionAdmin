@@ -36,3 +36,14 @@ export function deleteUser(id) {
     method: 'delete'
   })
 }
+
+export function updateUserType(id, userType) {
+  return request({
+    url: '/user/updateUserType',
+    method: 'patch',
+    params: {
+      userId: id,
+      userType: userType
+    }
+  })
+}

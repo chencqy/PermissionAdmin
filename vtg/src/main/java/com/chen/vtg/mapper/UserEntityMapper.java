@@ -26,4 +26,11 @@ public interface UserEntityMapper extends BaseMapper<UserEntity, Integer> {
      * @param avatar
      */
     void updateAvatar(@Param("userId") Integer userId, @Param("avatar") String avatar);
+
+    /**
+     *
+     * @param userId
+     * @param userType
+     */
+    void updateUserType(@Param("userId") Integer userId, @Param("userType") Integer userType);
 }

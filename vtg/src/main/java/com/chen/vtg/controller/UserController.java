@@ -72,4 +72,12 @@ public class UserController extends BaseController<UserEntity, Integer, UserServ
         PageInfo<UserEntity> userLists = userService.selectList(page);
         return userLists;
     }
+
+    @ApiOperation(value = "更新用户类型", notes = "更新用户类型")
+    @PatchMapping("/updateUserType")
+    public Result<Integer> updateUserType(@RequestParam("userId") Integer userId,
+                                          @RequestParam("userType") Integer userType) {
+        userService.updateUserType(userId, userType);
+        return Result.ok(userType);
+    }
 }

@@ -84,5 +84,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity, Integer, UserEn
         userEntityMapper.updateAvatar(userId, avatar);
     }
 
+    @Override
+    public void updateUserType(Integer userId, Integer userType) {
+        logger.info("update user type: {}", userType);
+        userEntityMapper.updateUserType(userId, userType);
+    }
+
 
 }

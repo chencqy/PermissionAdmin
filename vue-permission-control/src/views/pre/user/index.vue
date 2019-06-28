@@ -4,7 +4,7 @@
       <el-form ref="condition" :model="condition" class="form-container">
         <el-row>
           <el-col :span="20">
-            <el-form-item label-width="60px" label="Title:" >
+            <el-form-item label-width="10px" >
               <el-input v-model="condition.userName" placeholder="用户名"/>
             </el-form-item>
           </el-col>
@@ -41,10 +41,9 @@
           </template>
         </el-table-column>
 
-
         <el-table-column align="center" label="Actions" width="120">
           <template slot-scope="scope">
-              <el-button type="primary" size="small" icon="el-icon-edit">
+              <el-button type="primary" size="small" icon="el-icon-edit" @click="updateUserType(scope.row.id, scope.row.userType)">
                 更新
               </el-button>
           </template>
@@ -67,6 +66,7 @@ import Pagination from '@/components/Pagination'
 import { searchUser } from '@/api/user'
 import { getUserList } from '@/api/user'
 import { deleteUser } from '@/api/user'
+import { updateUserType } from '@/api/user'
 
 export default {
   components: { Pagination },
@@ -124,7 +124,25 @@ export default {
       this.$router.replace({
         path: '/redirect' + fullPath
       })
-    }
+    },
+    updateUserType(id, userType) {
+      this.listLoading = true
+      updateUserType(id, userType).then(response => {
+        this.$notify({
+          title: '成功',
+          message: '更新用户类型成功',
+          type: 'success',
+          duration: 2000
+        })
+        this.loading = false
+      }).catch(err => {
+        console.log(err)
+      })
+      const { fullPath } = this.$route
+      this.$router.replace({
+        path: '/redirect' + fullPath
+      })
+    },
   }
 }
 

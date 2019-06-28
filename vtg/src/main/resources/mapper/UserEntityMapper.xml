@@ -186,4 +186,12 @@
       id = #{userId}
     </where>
   </update>
+
+  <update id="updateUserType">
+    update t_user
+    set user_type = #{userType}
+    <where>
+      id = #{userId}
+    </where>
+  </update>
 </mapper>
