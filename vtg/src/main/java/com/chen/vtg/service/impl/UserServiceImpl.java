@@ -5,12 +5,15 @@ import com.chen.vtg.entity.RoleEntity;
 import com.chen.vtg.entity.UserEntity;
 import com.chen.vtg.entity.vo.ButtonVo;
 import com.chen.vtg.entity.vo.MenuVo;
+import com.chen.vtg.entity.vo.PageVo;
 import com.chen.vtg.entity.vo.UserVo;
 import com.chen.vtg.mapper.RoleEntityMapper;
 import com.chen.vtg.mapper.UserEntityMapper;
 import com.chen.vtg.service.ImageService;
 import com.chen.vtg.service.UserService;
 import com.chen.vtg.utils.TreeNode;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +91,12 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity, Integer, UserEn
     public void updateUserType(Integer userId, Integer userType) {
         logger.info("update user type: {}", userType);
         userEntityMapper.updateUserType(userId, userType);
+    }
+
+    @Override
+    public PageInfo<UserEntity> getUserListSelective(PageVo page, UserEntity userEntity) {
+        return PageHelper.startPage(page.getPageNum(), page.getPageSize()).
+                doSelectPageInfo(() -> userEntityMapper.getUserListSelective(userEntity));
     }
 
 

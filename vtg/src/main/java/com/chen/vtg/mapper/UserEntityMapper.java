@@ -5,6 +5,8 @@ import com.chen.vtg.entity.UserEntity;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserEntityMapper extends BaseMapper<UserEntity, Integer> {
 
@@ -33,4 +35,11 @@ public interface UserEntityMapper extends BaseMapper<UserEntity, Integer> {
      * @param userType
      */
     void updateUserType(@Param("userId") Integer userId, @Param("userType") Integer userType);
+
+    /**
+     *
+     * @param userEntity
+     * @return List<UserEntity>
+     */
+    List<UserEntity> getUserListSelective(UserEntity userEntity);
 }

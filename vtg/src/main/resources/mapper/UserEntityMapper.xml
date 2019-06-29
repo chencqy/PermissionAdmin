@@ -194,4 +194,16 @@
       id = #{userId}
     </where>
   </update>
+
+  <select id="getUserListSelective" parameterType="com.chen.vtg.entity.UserEntity"
+          resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM t_user
+    <trim prefix="WHERE" prefixOverrides="AND |OR ">
+      <if test="accountName != null">
+        account_name LIKE "%"#{accountName,jdbcType=VARCHAR}"%"
+      </if>
+    </trim>
+  </select>
 </mapper>

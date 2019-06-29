@@ -80,4 +80,17 @@ public class UserController extends BaseController<UserEntity, Integer, UserServ
         userService.updateUserType(userId, userType);
         return Result.ok(userType);
     }
+
+    @ApiOperation(value = "搜索用户", notes = "条件查询用户")
+    @GetMapping("/search")
+    public PageInfo<UserEntity> searchArticle(@RequestParam("pageNum")int pageNum, @RequestParam("pageSize")int pageSize,
+                                             @RequestParam("userName")String userName) {
+        PageVo page = new PageVo();
+        page.setPageNum(pageNum);
+        page.setPageSize(pageSize);
+        UserEntity userEntity = new UserEntity();
+        userEntity.setAccountName(userName);
+        PageInfo<UserEntity> userLists = userService.getUserListSelective(page, userEntity);
+        return userLists;
+    }
 }

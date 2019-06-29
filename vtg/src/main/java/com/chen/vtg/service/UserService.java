@@ -2,7 +2,9 @@ package com.chen.vtg.service;
 
 import com.chen.vtg.base.service.BaseService;
 import com.chen.vtg.entity.UserEntity;
+import com.chen.vtg.entity.vo.PageVo;
 import com.chen.vtg.entity.vo.UserVo;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -37,4 +39,11 @@ public interface UserService extends BaseService<UserEntity, Integer> {
      * @param userType
      */
     void updateUserType(Integer userId, Integer userType);
+
+    /**
+     *
+     * @param page
+     * @return PageInfo<UserEntity>
+     */
+    PageInfo<UserEntity> getUserListSelective(PageVo page, UserEntity userEntity);
 }
