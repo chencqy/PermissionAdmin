@@ -10,14 +10,12 @@ export function updateUserInfo(user) {
 
 export function searchUser(query, list) {
   return request({
-    url: '/article/search',
+    url: '/user/search',
     method: 'get',
     params: {
       pageNum: query.pageNum,
       pageSize: query.pageSize,
-      title: list.title,
-      author: list.author,
-      status: list.status
+      userName: list.userName,
     }
   })
 }

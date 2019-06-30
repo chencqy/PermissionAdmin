@@ -26,13 +26,13 @@
           </template>
         </el-table-column>
 
-        <el-table-column width="220px" align="center" label="Author">
+        <el-table-column width="220px" align="center" label="Name">
           <template slot-scope="scope">
             <span>{{ scope.row.accountName }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column width="420px" align="center" label="type">
+        <el-table-column width="420px" align="center" label="Type">
           <template slot-scope="scope">
             <el-radio-group v-model="scope.row.userType">
               <el-radio :label="1">管理员</el-radio>
