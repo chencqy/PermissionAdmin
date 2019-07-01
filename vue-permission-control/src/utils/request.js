@@ -14,8 +14,9 @@ service.interceptors.request.use(
   config => {
     debugger
     if (store.getters.token) {
-      // config.headers['access_token'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
       config.headers['Authorization'] = 'Bearer ' + getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+    } else {
+      config.headers['Authorization'] = ''
     }
     return config
   },

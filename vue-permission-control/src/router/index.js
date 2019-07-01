@@ -26,6 +26,7 @@ export const constantRouterMap = [
   { path: '/login', component: () => import('@/views/login/index'), hidden: true },
   { path: '/404', component: () => import('@/views/404'), hidden: true },
   { path: '/register', component: () => import('@/views/login/register'), hidden: true },
+  { path: '/githubLogin', component: () => import('@/views/login/githubLogin'), hidden: true },
 
   {
     path: '/redirect',

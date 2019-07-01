@@ -39,3 +39,17 @@ export function logout() {
     method: 'post'
   })
 }
+
+export function githubLogin(code) {
+  return request({
+    url: '/login/github',
+    method: 'post',
+    params: {
+      code: code
+    },
+    auth: {
+      username: 'client',
+      password: 'secret'
+    }
+  })
+}
