@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
@@ -23,7 +24,7 @@ import org.springframework.web.client.RestTemplate;
 public class GitHubAuthentication implements MyAuthentication{
 
     @Autowired
-    private UserEntityMapper userDao;
+    private UserEntityMapper userEntityMapper;
 
     private RestTemplate restTemplate = new RestTemplate();
 
@@ -34,6 +35,8 @@ public class GitHubAuthentication implements MyAuthentication{
     private static final String GITHUB_ACCESS_TOKEN_URL = "https://github.com/login/oauth/access_token";
 
     private static final String GITHUB_USER_URL = "https://api.github.com/user";
+
+    private final static String DEFAULT_PASSWORD = "chen";
 
     @Override
     @Transactional
@@ -70,7 +73,7 @@ public class GitHubAuthentication implements MyAuthentication{
                 throw new LoginFailureException(githubUserInfo.toString());
             }
 
-            userEntity = userDao.getUserByAccountName(accountName);
+            userEntity = userEntityMapper.getUserByAccountName(accountName);
 
             if (userEntity == null) {
                 return insertUser(githubUserInfo);
@@ -90,12 +93,15 @@ public class GitHubAuthentication implements MyAuthentication{
 
         userEntity.setEmail(githubToken.getString("email"));
         userEntity.setAccountName(githubToken.getString("login"));
-//        userEntity.setUrl(githubToken.getString("html_url"));
         userEntity.setUserType(0);
 
-        userDao.insert(userEntity);
+        String password = DEFAULT_PASSWORD;
+        password = new BCryptPasswordEncoder().encode(password);
+        userEntity.setPassword(password);
 
-
+        userEntityMapper.insertSelective(userEntity);
+        userEntity = userEntityMapper.getUserByAccountName(userEntity.getAccountName());
+        userEntityMapper.insertUserRoleDefault(userEntity.getId());
         return userEntity.getAccountName();
     }
 }

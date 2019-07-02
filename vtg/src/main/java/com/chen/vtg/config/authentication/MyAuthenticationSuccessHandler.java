@@ -79,9 +79,10 @@ public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
 
         if (clientDetails == null) {
             throw new UnapprovedClientAuthenticationException("clientId对应的配置信息不存在：" + clientId);
-        } else if (clientSecret != null && !clientSecret.equals(clientDetails.getClientSecret().substring(6,12))) {
-            throw new UnapprovedClientAuthenticationException("clientSecret不匹配：" + clientId);
         }
+//        else if (clientSecret != null && !clientSecret.equals(clientDetails.getClientSecret().substring(6,12))) {
+//            throw new UnapprovedClientAuthenticationException("clientSecret不匹配：" + clientId);
+//        }
 
         TokenRequest tokenRequest = new TokenRequest(new HashMap<String, String>(), clientId, clientDetails.getScope(),
                 "custom");
