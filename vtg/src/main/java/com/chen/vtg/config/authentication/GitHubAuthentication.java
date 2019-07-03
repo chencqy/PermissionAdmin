@@ -91,8 +91,10 @@ public class GitHubAuthentication implements MyAuthentication{
     private String insertUser(JSONObject githubToken) throws JSONException {
         UserEntity userEntity = new UserEntity();
 
+        String avatar = githubToken.getString("avatar_url");
         userEntity.setEmail(githubToken.getString("email"));
         userEntity.setAccountName(githubToken.getString("login"));
+        userEntity.setAvatar(avatar);
         userEntity.setUserType(0);
 
         String password = DEFAULT_PASSWORD;
