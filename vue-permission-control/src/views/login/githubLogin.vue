@@ -1,6 +1,5 @@
 <template>
   <div>
-    github登录
   </div>
 </template>
 
@@ -11,25 +10,26 @@ import { setToken } from '@/utils/auth'
 export default {
   name: "GithubLogin",
   mounted() {
-    setTimeout(function () {
-      console.log(this.$route)
-    }, 10000)
-
   },
   created() {
-    debugger
     const code = this.$route.query.code
     this.githubLogin(code)
   },
   methods: {
     githubLogin(code) {
+      this.$notify({
+        title: '登录',
+        message: '正在登录...',
+        position: 'top-left',
+        duration: 2000
+      })
       githubLogin(code).then(
         function (response) {
-          debugger
           const data = response.data
           setToken(data.access_token)
           this.$store.commit('SET_TOKEN', data.access_token)
           this.$router.push({ path: "/" })
+          this.$message.success("登陆成功")
         }.bind(this)
       ).catch(
         function(error) {
