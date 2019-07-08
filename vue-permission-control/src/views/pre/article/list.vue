@@ -90,7 +90,7 @@
         <el-table-column align="center" label="Actions" width="120">
           <template slot-scope="scope">
             <router-link :to="'/article/edit/'+scope.row.id">
-              <el-button type="primary" size="small" icon="el-icon-edit">
+              <el-button type="primary" size="small" icon="el-icon-edit" :disabled=canEdit>
                 编辑
               </el-button>
             </router-link>
@@ -153,7 +153,8 @@ export default {
         value: 'draft',
         label: 'draft'
       }],
-      value: ''
+      value: '',
+      canEdit: false
     }
   },
   created() {
