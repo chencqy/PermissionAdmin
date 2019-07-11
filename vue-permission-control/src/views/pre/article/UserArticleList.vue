@@ -11,12 +11,7 @@
         </el-row>
         <el-row>
           <el-col :span="10">
-            <el-form-item label-width="60px" label="Author:" >
-              <el-input v-model="condition.author" placeholder="author" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="10">
-            <el-form-item label-width="60px" label="Status:" style="margin-left: 50px">
+            <el-form-item label-width="60px" label="Status:" style="margin-left: 14px">
               <el-select v-model="condition.status" clearable placeholder="请选择">
                 <el-option
                   v-for="item in options"
@@ -28,7 +23,7 @@
           </el-col>
         </el-row>
       </el-form>
-      <el-button v-loading="listLoading" style="margin-left: 10px; margin-bottom: 20px" type="success" @click="searchArticle(condition)">
+      <el-button v-loading="listLoading" style="margin-left: 10px; margin-bottom: 20px" type="success" @click="searchUserArticle(condition)">
         搜索
       </el-button>
       <el-table
@@ -105,7 +100,7 @@
         </el-table-column>
       </el-table>
     </div>
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.pageNum" :limit.sync="listQuery.pageSize" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" :page.sync="listQuery.pageNum" :limit.sync="listQuery.pageSize" @pagination="getUserArticleList" />
   </div>
 </template>
 
@@ -114,9 +109,10 @@ import { getArticleList } from '@/api/article'
 import { searchArticleList } from '@/api/article'
 import { deleteArticle } from '@/api/article'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
+import store from '../../../store'
 
 export default {
-  name: 'ArticleList',
+  name: "UserArticleList",
   components: { Pagination },
   filters: {
     formatDate(time) {
@@ -158,18 +154,19 @@ export default {
     }
   },
   created() {
-    this.getList()
+    this.getUserArticleList()
   },
   methods: {
-    getList() {
+    getUserArticleList() {
       this.listLoading = true
-      getArticleList(this.listQuery).then(response => {
+      this.condition.author = store.getters.name
+      searchArticleList(this.listQuery, this.condition).then(response => {
         this.list = response.data.list
         this.total = response.data.total
         this.listLoading = false
       })
     },
-    searchArticle(condition) {
+    searchUserArticle(condition) {
       this.listLoading = true
       searchArticleList(this.listQuery, condition).then(response => {
         this.list = response.data.list
@@ -198,6 +195,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style scoped>

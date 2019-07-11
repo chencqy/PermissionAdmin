@@ -72,7 +72,7 @@ export const constantRouterMap = [
     component: Layout,
     name: 'article',
     meta: {
-      title: '文章管理',
+      title: '我的文章',
       icon: 'edit'
     },
     children: [
@@ -101,7 +101,7 @@ export const constantRouterMap = [
       },
       {
         path: 'search',
-        component: () => import('@/views/pre/article/list'),
+        component: () => import('@/views/pre/article/UserArticleList'),
         name: 'Search',
         meta: {
           // resources: '',
@@ -135,11 +135,13 @@ export const asyncRouterMap = [
     },
     children: [
       {
-        path: 'index',
-        component: () => import('@/views/pre/permission/index'),
-        name: 'perm',
+        path: '/articles',
+        component: () => import('@/views/pre/article/list'),
+        name: 'articles',
         meta: {
-          resources: 'perm'
+          resources: 'article',
+          title: '所有文章',
+          icon: 'edit'
         }
       },
       {
@@ -148,6 +150,14 @@ export const asyncRouterMap = [
         name: 'user',
         meta: {
           resources: 'user'
+        }
+      },
+      {
+        path: 'index',
+        component: () => import('@/views/pre/permission/index'),
+        name: 'perm',
+        meta: {
+          resources: 'perm'
         }
       },
       {
