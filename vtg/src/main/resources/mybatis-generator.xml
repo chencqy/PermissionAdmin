@@ -1,82 +1,82 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE generatorConfiguration
-        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
-        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
-<generatorConfiguration>
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE generatorConfiguration-->
+        <!--PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"-->
+        <!--"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">-->
+<!--<generatorConfiguration>-->
 
-    <context id="MysqlTables">
+    <!--<context id="MysqlTables">-->
 
-        <!-- 生成的Java文件的编码 -->
-        <property name="javaFileEncoding" value="UTF-8"/>
+        <!--&lt;!&ndash; 生成的Java文件的编码 &ndash;&gt;-->
+        <!--<property name="javaFileEncoding" value="UTF-8"/>-->
 
-        <commentGenerator>
-            <property name="suppressDate" value="true"/>
-            <property name="suppressAllComments" value="true"/>
-        </commentGenerator>
+        <!--<commentGenerator>-->
+            <!--<property name="suppressDate" value="true"/>-->
+            <!--<property name="suppressAllComments" value="true"/>-->
+        <!--</commentGenerator>-->
 
-        <!--数据库链接地址账号密码-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/vtg"
-                        userId="root" password="230112cqy">
-        </jdbcConnection>
+        <!--&lt;!&ndash;数据库链接地址账号密码&ndash;&gt;-->
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
+                        <!--connectionURL="jdbc:mysql://127.0.0.1:3306/vtg"-->
+                        <!--userId="root" password="230112cqy">-->
+        <!--</jdbcConnection>-->
 
-        <javaTypeResolver>
-            <property name="forceBigDecimals" value="false"/>
-        </javaTypeResolver>
-
-
-        <!-- 生成模型的包名和位置 -->
-        <javaModelGenerator targetPackage="com.chen.vtg.entity" targetProject="src/main/java">
-            <!-- 是否对model添加 构造函数 -->
-            <property name="constructorBased" value="false"/>
-            <!-- 是否允许子包 -->
-            <property name="enableSubPackages" value="false"/>
-            <!-- 建立的Model对象是否不可改变,即生成的Model对象不会有setter方法只有构造方法 -->
-            <property name="immutable" value="false"/>
-            <!-- 是否对类CHAR类型的列的数据进行trim操作 -->
-            <property name="trimStrings" value="true"/>
-        </javaModelGenerator>
-
-        <!-- 生成的映射文件包名和位置 -->
-        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/java">
-            <property name="enableSubPackages" value="true"/>
-        </sqlMapGenerator>
-
-        <!-- 生成DAO的包名和位置 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.chen.vtg.mapper"
-                             targetProject="src/main/java">
-            <property name="enableSubPackages" value="true"/>
-        </javaClientGenerator>
-
-        <!--生成对应表及类名-->
-
-        <table tableName="t_permission" domainObjectName="PermissionEntity"
-        enableCountByExample="false"
-        enableUpdateByExample="false"
-        enableDeleteByExample="false"
-        enableSelectByExample="false"
-        selectByExampleQueryId="false">
-        <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-
-        <table tableName="t_role" domainObjectName="RoleEntity"
-        enableCountByExample="false"
-        enableUpdateByExample="false"
-        enableDeleteByExample="false"
-        enableSelectByExample="false"
-        selectByExampleQueryId="false">
-        <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-
-        <table tableName="t_user" domainObjectName="UserEntity"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<javaTypeResolver>-->
+            <!--<property name="forceBigDecimals" value="false"/>-->
+        <!--</javaTypeResolver>-->
 
 
-    </context>
-</generatorConfiguration>
+        <!--&lt;!&ndash; 生成模型的包名和位置 &ndash;&gt;-->
+        <!--<javaModelGenerator targetPackage="com.chen.vtg.entity" targetProject="src/main/java">-->
+            <!--&lt;!&ndash; 是否对model添加 构造函数 &ndash;&gt;-->
+            <!--<property name="constructorBased" value="false"/>-->
+            <!--&lt;!&ndash; 是否允许子包 &ndash;&gt;-->
+            <!--<property name="enableSubPackages" value="false"/>-->
+            <!--&lt;!&ndash; 建立的Model对象是否不可改变,即生成的Model对象不会有setter方法只有构造方法 &ndash;&gt;-->
+            <!--<property name="immutable" value="false"/>-->
+            <!--&lt;!&ndash; 是否对类CHAR类型的列的数据进行trim操作 &ndash;&gt;-->
+            <!--<property name="trimStrings" value="true"/>-->
+        <!--</javaModelGenerator>-->
+
+        <!--&lt;!&ndash; 生成的映射文件包名和位置 &ndash;&gt;-->
+        <!--<sqlMapGenerator targetPackage="mapper" targetProject="src/main/java">-->
+            <!--<property name="enableSubPackages" value="true"/>-->
+        <!--</sqlMapGenerator>-->
+
+        <!--&lt;!&ndash; 生成DAO的包名和位置 &ndash;&gt;-->
+        <!--<javaClientGenerator type="XMLMAPPER" targetPackage="com.chen.vtg.mapper"-->
+                             <!--targetProject="src/main/java">-->
+            <!--<property name="enableSubPackages" value="true"/>-->
+        <!--</javaClientGenerator>-->
+
+        <!--&lt;!&ndash;生成对应表及类名&ndash;&gt;-->
+
+        <!--<table tableName="t_permission" domainObjectName="PermissionEntity"-->
+        <!--enableCountByExample="false"-->
+        <!--enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false"-->
+        <!--enableSelectByExample="false"-->
+        <!--selectByExampleQueryId="false">-->
+        <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="t_role" domainObjectName="RoleEntity"-->
+        <!--enableCountByExample="false"-->
+        <!--enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false"-->
+        <!--enableSelectByExample="false"-->
+        <!--selectByExampleQueryId="false">-->
+        <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="t_user" domainObjectName="UserEntity"-->
+               <!--enableCountByExample="false"-->
+               <!--enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+        <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+
+
+    <!--</context>-->
+<!--</generatorConfiguration>-->
