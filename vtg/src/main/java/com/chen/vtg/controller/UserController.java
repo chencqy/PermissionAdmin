@@ -62,7 +62,8 @@ public class UserController extends BaseController<UserEntity, Integer, UserServ
     @ApiOperation(value = "上传头像", notes = "上传头像图片源文件到服务器")
     @PostMapping("/avatar/upload")
     public Result<String> uploadUserAvatar(@RequestParam("picture") MultipartFile picture) {
-        String pictureUrl = imageService.saveImg(picture);
+        //String pictureUrl = imageService.saveImg(picture);
+        String pictureUrl = imageService.uploadImgWithAliyunOSS(picture);
         return Result.ok(pictureUrl);
     }
 

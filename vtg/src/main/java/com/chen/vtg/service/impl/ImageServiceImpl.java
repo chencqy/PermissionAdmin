@@ -1,7 +1,10 @@
 package com.chen.vtg.service.impl;
 
+import com.chen.vtg.exception.ImgException;
 import com.chen.vtg.service.ImageService;
 import com.chen.vtg.utils.ImageUtil;
+import com.chen.vtg.utils.OSSClientUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +25,9 @@ public class ImageServiceImpl implements ImageService {
     private static final String PRODUCTION_IMAGE_URL = "http://localhost/image/";
     private static final String DEVELOPMENT_PATH = "/home/chen/image/";
     private static final String DEVELOPMENT_IMAGE_URL = "http://47.108.64.204/home/chen/image/";
+
+    @Autowired
+    OSSClientUtil ossClientUtil;
 
     @Override
     public String saveImg(MultipartFile image) {
@@ -50,4 +56,18 @@ public class ImageServiceImpl implements ImageService {
         // imageUrl = "E:\\Program" + imageUrl.substring(imageUrl.lastIndexOf("/image/")).replaceAll("/", "\\\\");
         return ImageUtil.deleteImg(imageUrl);
     }
+
+    @Override
+    public String uploadImgWithAliyunOSS(MultipartFile file) {
+
+        if (file == null || file.getSize() <= 0) {
+            throw new ImgException("file不能为空");
+        }
+        String name = ossClientUtil.uploadImg2Oss(file);
+        String imgUrl = ossClientUtil.getImgUrl(name);
+        String[] split = imgUrl.split("\\?");
+        return split[0];
+    }
+
+
 }

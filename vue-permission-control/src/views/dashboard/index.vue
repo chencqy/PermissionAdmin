@@ -11,7 +11,7 @@
                    v-model="show"
                    :width="300"
                    :height="300"
-                   url="http://47.108.64.204/api/user/avatar/upload"
+                   url="http://localhost/api/user/avatar/upload"
                    :headers="headers"
                    img-format="png"></my-upload>
         <img :src="avatar">
