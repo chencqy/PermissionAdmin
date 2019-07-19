@@ -12,7 +12,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/vtg?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://47.108.64.204:3306/vtg?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: 230112cqy
     ###################以下为druid增加的配置###########################
@@ -45,9 +45,9 @@ spring:
   redis:
     #本地redis
     database: 4
-    host: 127.0.0.1
+    host: 47.108.64.204
     port: 6379
-    password: null
+    password: 230112cqy
 
 
 #mybatis
