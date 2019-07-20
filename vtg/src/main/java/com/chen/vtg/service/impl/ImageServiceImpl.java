@@ -69,5 +69,10 @@ public class ImageServiceImpl implements ImageService {
         return split[0];
     }
 
+    @Override
+    public void deleteImgWithAliyunOSS(String fileUrl) {
+        ossClientUtil.deleteFileOSS(fileUrl);
+    }
+
 
 }

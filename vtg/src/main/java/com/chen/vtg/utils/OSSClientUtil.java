@@ -144,6 +144,14 @@ public class OSSClientUtil {
         return ret;
     }
 
+    public void deleteFileOSS(String fileUrl) {
+        try {
+            ossClient.deleteObject(bucketName, fileUrl.substring(fileUrl.indexOf("qiuyu")).trim());
+        }catch (Exception e) {
+            throw new ImgException("图片删除失败");
+        }
+    }
+
     /**
      * Description: 判断OSS服务文件上传时文件的contentType
      *

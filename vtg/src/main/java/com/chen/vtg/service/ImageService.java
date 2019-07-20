@@ -27,5 +27,10 @@ public interface ImageService {
      */
     String uploadImgWithAliyunOSS(MultipartFile multipartFile);
 
-
+    /**
+     *
+     * @param fileUrl
+     * @return
+     */
+    void deleteImgWithAliyunOSS(String fileUrl);
 }

@@ -79,11 +79,12 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity, Integer, UserEn
 
     @Override
     public void updateUserAvatar(int userId, String avatar, String OldAvatar) {
-        if (imageService.deleteImg(OldAvatar)) {
-            logger.info("image: {} delete successfully", OldAvatar);
-        } else {
-            logger.info("image: {} delete failed", OldAvatar);
-        }
+//        if (imageService.deleteImg(OldAvatar)) {
+//            logger.info("image: {} delete successfully", OldAvatar);
+//        } else {
+//            logger.info("image: {} delete failed", OldAvatar);
+//        }
+        imageService.deleteImgWithAliyunOSS(OldAvatar);
         userEntityMapper.updateAvatar(userId, avatar);
     }
 
