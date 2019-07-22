@@ -103,7 +103,8 @@ public class ArticleController extends BaseController<ArticleEntity, Integer, Ar
         Map<String, String> resultMap = new HashMap<>();
         resultMap.put("time", String.valueOf(new Date().getTime()));
 
-        String pictureUrl = imageService.saveImg(image);
+        String pictureUrl = imageService.uploadImgWithAliyunOSS(image);
+        // String pictureUrl = imageService.saveImg(image);
         resultMap.put("url", pictureUrl);
         return resultMap;
     }
