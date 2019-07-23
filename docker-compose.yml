@@ -1,0 +1,29 @@
+version: '3'
+services:
+
+  nginx-vue:
+    container_name: nginx-vue
+    build:
+      context: ./
+      dockerfile: ./qiuyu-docker/front/Dockerfile
+    ports:
+     - "80:80"
+    volumes:
+     - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - qiuyu-server
+
+  qiuyu-server:
+    container_name: qiuyu-server
+    restart: always
+    build: 
+     context: ./
+     dockerfile: ./qiuyu-docker/server-Dockerfile
+    working_dir: /app
+    volumes:
+      
+    expose:
+      - "8091"
+    # command: mvn clean spring-boot:run -Dspring-boot.run.profiles=docker -Dmaven.test.skip=true
+    depends_on:
+      
