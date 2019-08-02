@@ -11,7 +11,7 @@ services:
     volumes:
      - ./logs/nginx:/var/log/nginx
     depends_on:
-      - qiuyu-server
+     - qiuyu-server
 
   qiuyu-server:
     container_name: qiuyu-server
@@ -20,10 +20,10 @@ services:
      context: ./
      dockerfile: ./qiuyu-docker/server-Dockerfile
     working_dir: /app
-    volumes:
+    # volumes:
       
     expose:
       - "8091"
-    # command: mvn clean spring-boot:run -Dspring-boot.run.profiles=docker -Dmaven.test.skip=true
-    depends_on:
+    command: mvn clean spring-boot:run -Dspring-boot.run.profiles=docker -Dmaven.test.skip=true
+    # depends_on:
       
