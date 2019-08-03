@@ -1,4 +1,5 @@
-FROM openjdk:8-jdk-alpine
-VOLUME /tmp
-ADD vtg-1.0.1-SNAPSHOT.jar app.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+FROM maven:3.5.4-jdk-8
+
+MAINTAINER chencqy "chen.qy1996@hotmail.com"
+
+ENV LANG C.UTF-8
