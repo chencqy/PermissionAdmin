@@ -1,5 +1,18 @@
 version: '3'
 services:
+  qiuyu-nginx:
+    container_name: qiuyu-nginx
+    build:
+     context: ./
+     dockerfile: ./qiuyu-docker/nginx/nginx-Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+     - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - qiuyu-server
+      - nginx-vue
+
   qiuyu-server:
     container_name: qiuyu-server
     restart: always
@@ -11,15 +24,15 @@ services:
       - ./vtg:/app
     expose:
       - "8091"
-    command: mvn clean spring-boot:run -Dspring-boot.run.profiles=docker -Dmaven.test.skip=true
-               
+    command: mvn clean spring-boot:run -Dmaven.test.skip=true
+           
   nginx-vue:
     container_name: nginx-vue
     build:
       context: ./
       dockerfile: ./qiuyu-docker/front/Dockerfile
-    ports:
-     - "80:80"
+    expose:
+     - "9528"
     volumes:
      - ./logs/nginx:/var/log/nginx
     depends_on:

@@ -16,5 +16,5 @@ MAINTAINER chencqy "chen.qy1996@hotmail.com"
 
 COPY ./qiuyu-docker/front/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=buildstage /app/dist /usr/share/nginx/html
-EXPOSE 80
+EXPOSE 9528
 CMD ["nginx", "-g", "daemon off;"]
