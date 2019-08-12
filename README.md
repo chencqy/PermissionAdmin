@@ -3,7 +3,7 @@
 
 后端采用Spring Security OAuth2 管理用户登录以及权限问题，前端通过在[vue-admin-template](https://github.com/PanJiaChen/vue-element-admin)基础上修改而来。
 
-在线预览：[http://47.108.64.204](http://47.108.64.204/)
+在线预览：[http://47.110.10.150](http://47.110.10.150)
 ## 内容
 * 登录/github第三方登录、注销
 * 权限 --- 页面权限，按钮权限
