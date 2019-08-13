@@ -4,12 +4,16 @@ import { Message } from 'element-ui'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css'// progress bar style
 import { getToken } from '@/utils/auth' // getToken from cookie
+import { visitCount } from '@/api/visit'
 
 NProgress.configure({ showSpinner: false })// NProgress configuration
 
 const whiteList = ['/login', '/register', '/githubLogin']// no redirect whitelist
+const ip = "47.110.10.150"
+const app = "chencqy"
 
 router.beforeEach((to, from, next) => {
+  visitCount(app, ip, "http://" + ip + to.fullPath)
   NProgress.start() // start progress bar
   if (getToken()) { // determine if there has token
     /* has token*/
