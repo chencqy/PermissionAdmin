@@ -33,6 +33,7 @@ public class MyResourceServerConfigurerAdapter extends ResourceServerConfigurerA
                 .antMatchers("/article/image/upload").permitAll()
                 .antMatchers("/user/avatar/upload").permitAll()
                 .antMatchers("/login/github").permitAll()
+                .antMatchers("/visit/count").permitAll()
                 .anyRequest()
                 .authenticated();
     }
