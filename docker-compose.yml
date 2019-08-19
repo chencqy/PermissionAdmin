@@ -24,7 +24,7 @@ services:
       - ./vtg:/app
     expose:
       - "8091"
-    command: mvn clean spring-boot:run -Dmaven.test.skip=true
+    command: mvn clean spring-boot:run -Dspring-boot.run.profiles=docker -Dmaven.test.skip=true
            
   nginx-vue:
     container_name: nginx-vue
@@ -37,3 +37,13 @@ services:
      - ./logs/nginx:/var/log/nginx
     depends_on:
      - qiuyu-server
+
+  qiuyu-redis:
+    image: redis
+    container_name: qiuyu-redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    ports:
+      - "6378:6378"
+    volumes:
+      - ./data:/data
+      - .qiuyu-docker/redis/redis.conf:/usr/local/etc/redis/redis.conf
