@@ -43,7 +43,7 @@ services:
     container_name: qiuyu-redis
     command: redis-server /usr/local/etc/redis/redis.conf
     ports:
-      - "6378:6378"
+      - "6379:6379"
     volumes:
       - ./data:/data
       - .qiuyu-docker/redis/redis.conf:/usr/local/etc/redis/redis.conf

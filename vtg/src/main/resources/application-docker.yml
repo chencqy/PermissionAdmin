@@ -45,9 +45,9 @@ spring:
   redis:
     #服务器redis
     database: 4
-    host: 47.110.10.150
+    host: qiuyu-redis
     port: 6379
-    password: 230112cqy
+    password: 
     jedis:
       pool:
         max-idle: 6
