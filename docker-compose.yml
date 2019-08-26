@@ -41,7 +41,7 @@ services:
   qiuyu-redis:
     image: redis
     container_name: qiuyu-redis
-    command: redis-server /usr/local/etc/redis/redis.conf --requirepass 230112cqy
+    command: redis-server /usr/local/etc/redis/redis.conf --requirepass 230112cqy --appendonly yes
     ports:
       - "6379:6379"
     volumes:
