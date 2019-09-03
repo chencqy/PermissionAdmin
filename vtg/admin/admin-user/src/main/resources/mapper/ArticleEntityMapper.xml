@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.admin.user.mapper.ArticleEntityMapper">
+    <resultMap id="BaseResultMap" type="com.chen.admin.user.entity.ArticleEntity">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="uid" jdbcType="INTEGER" property="uid" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="author" jdbcType="VARCHAR" property="author" />
+        <result column="content" jdbcType="LONGVARCHAR" property="content" />
+        <result column="image" jdbcType="VARCHAR" property="image" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+        <result column="vote" jdbcType="INTEGER" property="vote" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+    <resultMap id="FullResultMap" type="com.chen.admin.user.entity.vo.ArticleVo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="uid" jdbcType="INTEGER" property="uid" />
+        <result column="author" jdbcType="VARCHAR" property="author" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="content" jdbcType="LONGVARCHAR" property="content" />
+        <result column="image" jdbcType="VARCHAR" property="image" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+        <result column="vote" jdbcType="INTEGER" property="vote" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <collection property="tags" ofType="com.chen.admin.user.entity.TagEntity">
+            <id column="tid" jdbcType="INTEGER" property="id"/>
+            <result column="name" jdbcType="VARCHAR" property="name"/>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, uid, title, author, content, image, status, vote, create_time
+    </sql>
+
+    <select id="getArticleByTitle" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from article
+        where title LIKE "%"#{title,jdbcType=VARCHAR}"%"
+    </select>
+
+    <select id="getArticleList" resultMap="FullResultMap">
+        SELECT a.id, a.uid, a.author, a.title, a.content, a.image, a.status, a.vote, a.create_time,
+               t.id AS tid, t.name
+        FROM article AS a
+        LEFT JOIN tag_article AS tagr ON a.id = tagr.aid
+        LEFT JOIN tag AS t ON t.id = tagr.tid
+        LEFT JOIN t_user AS u ON a.uid = u.id
+        ORDER BY a.create_time DESC
+    </select>
+
+    <select id="getArticleListSelective" parameterType="com.chen.admin.user.entity.vo.ArticleVo"
+            resultMap="FullResultMap">
+        SELECT a.id, a.uid, a.author, a.title, a.content, a.image, a.status, a.vote, a.create_time,
+               t.id AS tid, t.name
+        FROM article AS a
+        LEFT JOIN tag_article AS tagr ON a.id = tagr.aid
+        LEFT JOIN tag AS t ON t.id = tagr.tid
+        LEFT JOIN t_user AS u ON a.uid = u.id
+            <trim prefix="WHERE" prefixOverrides="AND |OR ">
+                <if test="uid != null">
+                    uid = #{uid,jdbcType=INTEGER}
+                </if>
+                <if test="title != null and title != ''">
+                    AND title LIKE "%"#{title,jdbcType=VARCHAR}"%"
+                </if>
+                <if test="author != null and author != ''">
+                    AND author = #{author,jdbcType=VARCHAR}
+                </if>
+                <if test="status != null and status != ''">
+                    AND status = #{status,jdbcType=VARCHAR}
+                </if>
+                <!--<if test="createTime != null">-->
+                    <!--create_time = #{createTime,jdbcType=TIMESTAMP}-->
+                <!--</if>-->
+            </trim>
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from article
+    </select>
+
+    <select id="getArticleByUid" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from article
+    </select>
+
+    <select id="getArticleById" parameterType="java.lang.Integer" resultMap="FullResultMap">
+        SELECT a.id, a.uid, a.author AS author, a.title, a.content, a.image, a.status, a.vote, a.create_time,
+               t.id AS tid, t.name
+        FROM article AS a
+        LEFT JOIN tag_article AS tagr ON a.id = tagr.aid
+        LEFT JOIN tag AS t ON t.id = tagr.tid
+        LEFT JOIN t_user AS u ON a.uid = u.id
+        WHERE a.id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from article
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from article
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.chen.admin.user.entity.ArticleEntity">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+            insert into article (uid, title, author, content, image,
+            status, vote, create_time)
+            values (#{uid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
+            #{content,jdbcType=LONGVARCHAR}, #{image,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+            #{vote,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.chen.admin.user.entity.ArticleEntity">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+            insert into article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="author != null">
+                author,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="image != null">
+                image,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="vote != null">
+                vote,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uid != null">
+                #{uid,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="author != null">
+                #{author,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="image != null">
+                #{image,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="vote != null">
+                #{vote,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.chen.admin.user.entity.ArticleEntity">
+        update article
+        <set>
+            <if test="uid != null">
+                uid = #{uid,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="author != null">
+                author = #{author,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="image != null">
+                image = #{image,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="vote != null">
+                vote = #{vote,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.chen.admin.user.entity.ArticleEntity">
+    update article
+    set uid = #{uid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      vote = #{vote,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.admin.user.mapper.UserEntityMapper">
+  <resultMap id="BaseResultMap" type="com.chen.admin.user.entity.UserEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="account_name" jdbcType="VARCHAR" property="accountName" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="user_type" jdbcType="INTEGER" property="userType" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, avatar, account_name, name, user_type, mobile, password, email, url, create_time, info
+  </sql>
+
+  <select id="selectList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+  </select>
+
+  <select id="getUserByAccountName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    where account_name = #{accountName,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.chen.admin.user.entity.UserEntity">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_user
+      (avatar, account_name, name,
+       user_type, mobile, password,
+       email, url, create_time, info)
+    values (#{avatar,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{userType,jdbcType=INTEGER},
+      #{mobile,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{info,jdbcType=VARCHAR}, )
+  </insert>
+  <insert id="insertSelective" parameterType="com.chen.admin.user.entity.UserEntity">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="accountName != null">
+        account_name,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="info != null">
+        info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null">
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="info != null">
+        #{info,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chen.admin.user.entity.UserEntity">
+    update t_user
+    <set>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null">
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="info != null">
+        info = #{info,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chen.admin.user.entity.UserEntity">
+    update t_user
+    set avatar = #{avatar,jdbcType=VARCHAR},
+      account_name = #{accountName,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=INTEGER},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      info = #{info,jdbcType=VARCHAR},
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertUserRoleDefault" parameterType="java.lang.Integer">
+    INSERT INTO user_role(user_id, role_id)
+    VALUES (#{userId,jdbcType=INTEGER}, 2)
+  </insert>
+
+  <update id="updateAvatar">
+    update t_user
+    set avatar = #{avatar}
+    <where>
+      id = #{userId}
+    </where>
+  </update>
+
+  <update id="updateUserType">
+    update t_user
+    set user_type = #{userType}
+    <where>
+      id = #{userId}
+    </where>
+  </update>
+
+  <select id="getUserListSelective" parameterType="com.chen.admin.user.entity.UserEntity"
+          resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM t_user
+    <trim prefix="WHERE" prefixOverrides="AND |OR ">
+      <if test="accountName != null">
+        account_name LIKE "%"#{accountName,jdbcType=VARCHAR}"%"
+      </if>
+    </trim>
+  </select>
+</mapper>

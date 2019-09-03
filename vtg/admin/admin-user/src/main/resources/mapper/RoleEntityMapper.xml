@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.admin.user.mapper.RoleEntityMapper">
+    <resultMap id="BaseResultMap" type="com.chen.admin.user.entity.RoleEntity">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="role" jdbcType="VARCHAR" property="role"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        <result column="description" jdbcType="LONGVARCHAR" property="description"/>
+        <collection property="permissions" ofType="com.chen.admin.user.entity.PermissionEntity">
+            <id column="pid" jdbcType="INTEGER" property="id"/>
+            <result column="parent" jdbcType="INTEGER" property="parent"/>
+            <result column="resources" jdbcType="VARCHAR" property="resources"/>
+            <result column="name" jdbcType="VARCHAR" property="name"/>
+            <result column="icon" jdbcType="VARCHAR" property="icon"/>
+            <result column="type" jdbcType="VARCHAR" property="type"/>
+            <result column="pdescription" jdbcType="VARCHAR" property="description"/>
+            <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, role, role_name, description
+    </sql>
+
+    <select id="getRoleByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+            r.id, r.role, r.role_name, r.description,
+            p.id AS pid, p.parent, p.resources, p.icon, p.name, p.type, p.description AS pdescription, p.create_time
+        from t_user u
+        LEFT JOIN user_role AS ur ON u.id = ur.user_id
+        LEFT JOIN t_role AS r ON r.id = ur.role_id
+        LEFT JOIN role_permission AS rp ON rp.role_id = r.id
+        LEFT JOIN t_permission AS p ON p.id = rp.permission_id
+        where u.id = #{userId,jdbcType=INTEGER}
+  </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_role
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.chen.admin.user.entity.RoleEntity">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_role (role, role_name, description)
+        values (#{role,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR},
+        #{description,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.chen.admin.user.entity.RoleEntity">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="role != null">
+                role,
+            </if>
+            <if test="roleName != null">
+                role_name,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="role != null">
+                #{role,jdbcType=VARCHAR},
+            </if>
+            <if test="roleName != null">
+                #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.chen.admin.user.entity.RoleEntity">
+        update t_role
+        <set>
+            <if test="role != null">
+                role = #{role,jdbcType=VARCHAR},
+            </if>
+            <if test="roleName != null">
+                role_name = #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.chen.admin.user.entity.RoleEntity">
+        update t_role
+            set role = #{role,jdbcType=VARCHAR},
+                role_name = #{roleName,jdbcType=VARCHAR},
+                description = #{description,jdbcType=LONGVARCHAR}
+            where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.chen.admin.user.entity.RoleEntity">
+        update t_role
+        set role = #{role,jdbcType=VARCHAR},
+            role_name = #{roleName,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>
