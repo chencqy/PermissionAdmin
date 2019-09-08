@@ -1,12 +1,12 @@
 server:
-  port: ${EUREKA_PORT:8099}
+  port: 8099
 
 eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
-      defaultZone: http://${EUREKA_ZONE_HOST:localhost}:${EUREKA_ZONE_PORT:8099}/eureka/
+      defaultZone: http://localhost:8099/eureka/
 
 spring:
   application:
