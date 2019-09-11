@@ -1,0 +1,13 @@
+server:
+  port: 8096
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://user:user@127.0.0.1:8099/eureka/
+  instances:
+    prefer-ip-address: true
+
+spring:
+  application:
+    name: admin-user
