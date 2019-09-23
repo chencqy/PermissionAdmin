@@ -1,9 +1,10 @@
 import { login, logout, getInfo } from '@/api/login'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getRefreshToken, getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
   state: {
     token: getToken(),
+    refreshToken: getRefreshToken(),
     name: '',
     avatar: '',
     roles: [],
@@ -14,6 +15,9 @@ const user = {
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token
+    },
+    SET_REFRESHTOKEN: (state, refreshToken) => {
+      state.refreshToken = refreshToken
     },
     SET_NAME: (state, name) => {
       state.name = name
@@ -41,6 +45,7 @@ const user = {
           const data = response.data
           setToken(data.access_token)
           commit('SET_TOKEN', data.access_token)
+          commit('SET_REFRESHTOKEN', data.refresh_token)
           resolve()
         }).catch(error => {
           reject(error)
