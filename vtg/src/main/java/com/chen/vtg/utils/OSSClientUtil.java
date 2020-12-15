@@ -29,8 +29,8 @@ public class OSSClientUtil {
     // endpoint
     private String endpoint = "http://oss-cn-hangzhou.aliyuncs.com";
     // accessKey
-    private String accessKeyId = "LTAIghqwJNhllF4Z";
-    private String accessKeySecret = "QtNfaTMxMsj8UWwl7z6oHaLZMz4K03";
+    private String accessKeyId = "accessKeyId";
+    private String accessKeySecret = "accessKeySecret";
     // 空间
     private String bucketName = "chencqy";
     // 文件存储目录
